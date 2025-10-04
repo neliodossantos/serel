@@ -31,8 +31,8 @@ const handleReadMore = (reviewId: string | undefined) => {
 <template>
   <div class="mb-16 md:block hidden">
     <div class="flex gap-4">
-      <div class="z-10 flex relative items-end justify-center border bg-gray-300 w-10 h-10 md:w-12 md:h-12 rounded-full z-10">
-        <i class='z-0 bx bxs-user text-4xl absolute -bottom-2 text-white'></i>
+      <div class="z-10 w-10 h-10 md:w-12 md:h-12">
+        <img src="@/assets/img/avatar.png" alt="">
       </div>
       <div class="">
         <p class="text-[#767676] font-bold dark:text-gray-200">{{review.jobTitle}} {{review.employeeType ===  'Ex-employee' ? '(Ex-Funcionário)' : '(Funcionário actual)' }}</p>

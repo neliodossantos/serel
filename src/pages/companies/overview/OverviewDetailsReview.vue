@@ -93,14 +93,14 @@ onMounted(async () => {
   />
   <PreloaderComponent v-else-if="isLoading"></PreloaderComponent>
   <MainLayout v-else>
-    <div class="w-full bg-[#F8FAFB] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
+    <div class="w-full bg-[#F8FAFB] dark:bg-[#000e1c] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
     <div class="w-full mb-24 px-[12%] md:px-0">
       <div class="mx-auto relative  max-w-[400px] sm:max-w-[600px] md:max-w-[900px]">
-        <a v-if="userStore.isLogged()" @click="backToPage" class="cursor-pointer flex items-center">
+        <a v-if="userStore.isLogged()" @click="backToPage" class="cursor-pointer flex items-center dark:text-white">
           <i class='bx bx-chevron-left text-3xl md:text-2xl'></i>
           Voltar a página anterior
         </a>
-        <a v-else href="/" class="cursor-pointer flex items-center">
+        <a v-else href="/" class="cursor-pointer flex items-center dark:text-white">
           <i class='bx bx-chevron-left text-3xl md:text-2xl'></i>
           Voltar a página inicial
         </a>

@@ -42,14 +42,14 @@ const handleReadMore = (reviewId: string | undefined) => {
     <template class="" v-for="(review, index) in reviews" #[`slide-${index}`]="{ item }">
       <div class="border w-full py-5 h-80 rounded-md px-8 xxs:px-6">
         <div class="flex gap-4">
-          <img class="xs:w-8 xs:h-8 w-12 h-12" src="@/assets/img/avatar.jpeg" alt="">
+          <img class="xs:w-8 xs:h-8 w-12 h-12" src="@/assets/img/avatar.png" alt="">
           <div class="">
-            <p class="text-[#767676] xxs:text-sm font-bold">{{review.jobTitle}} {{review.employeeType ===  'Ex-employee' ? '(Ex-Funcionário)' : '(Funcionário actual)' }}</p>
-            <span class="xxs:text-sm text-md text-[#767676]"> em {{getDay(review.createdAt)}} de {{getMonth(review.createdAt)}} de {{getYear(review.createdAt)}}</span>
+            <p class="text-[#767676] xxs:text-sm font-bold dark:text-gray-300">{{review.jobTitle}} {{review.employeeType ===  'Ex-employee' ? '(Ex-Funcionário)' : '(Funcionário actual)' }}</p>
+            <span class="xxs:text-sm text-md text-[#767676] dark:text-gray-200"> em {{getDay(review.createdAt)}} de {{getMonth(review.createdAt)}} de {{getYear(review.createdAt)}}</span>
           </div>
         </div>
         <div class="flex gap-1 items-center">
-          <span class="text-lg font-bold">{{review.score}},0 </span>
+          <span class="text-lg font-bold dark:text-gray-300">{{review.score}},0 </span>
           <div class="flex gap-1 items-center">
             <i v-for="n in filledStars(review.score)" :key="'filled-' + n" class="bx bxs-star xxs:text-md text-lg 3xl:text-2xl  text-[#003F72]"></i>
             <i v-if="hasHalfStar((review.score))" class="bx bxs-star-half text-[#003F72] xxs:text-md text-lg  3xl:text-2xl"></i>
@@ -57,11 +57,11 @@ const handleReadMore = (reviewId: string | undefined) => {
           </div>
         </div>
         <div class="xs:mt-2 mt-4">
-          <h3 class="px-2 text-[#2D2D2D] xxs:text-sm xs:text-base text-lg font-bold lg:w-[630px] xl:max-w-[800px]">{{review.reviewTitle}}</h3>
+          <h3 class="px-2 text-[#2D2D2D] xxs:text-sm xs:text-base text-lg font-bold lg:w-[630px] xl:max-w-[800px] dark:text-gray-300">{{review.reviewTitle}}</h3>
           <div class="w-full px-2">
-            <p class="lg:max-w-[60%] xs:text-base max-w-full break-words">{{ truncateComment(review.comment?.comment || "").truncated }}
+            <p class="lg:max-w-[60%] xs:text-base max-w-full break-words dark:text-gray-300">{{ truncateComment(review.comment?.comment || "").truncated }}
               <span v-if="truncateComment(review.comment?.comment || '').isTruncated"
-                  @click="handleReadMore(review.id)" class="text-[#003f72] underline cursor-pointer">
+                  @click="handleReadMore(review.id)" class="text-[#003f72] underline cursor-pointer dark:text-blue-500">
                 saiba mais...
               </span>
             </p>

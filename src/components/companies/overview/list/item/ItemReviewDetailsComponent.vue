@@ -185,7 +185,7 @@ onMounted(async () => {
 <template>
   <div class="w-full mt-8 flex md:flex-row flex-col gap-8 border-b-[3px] pb-10 border-[#E4E2E0]">
     <div class="">
-      <span class="font-bold text-2xl">{{ localReview.score }},0</span>
+      <span class="font-bold text-2xl dark:text-white">{{ localReview.score }},0</span>
       <div class="flex mt-2">
         <i v-for="n in filledStars" :key="'filled-' + n" class="bx bxs-star text-2xl text-[#003F72]"></i>
         <i v-if="hasHalfStar" class="bx bxs-star-half text-[#003F72] text-2xl"></i>
@@ -194,32 +194,32 @@ onMounted(async () => {
     </div>
     <div class="flex-1">
       <div class="pb-5">
-        <h2 class="text-2xl pr-2 font-bold">{{ localReview.reviewTitle }}</h2>
+        <h2 class="text-2xl pr-2 font-bold dark:text-white">{{ localReview.reviewTitle }}</h2>
         <div class="my-1">
-          <span class="text-[#767676] underline md:text-normal text-sm mr-1"> {{ localReview.jobTitle }} </span>
-          <span class="text-[#767676]"> {{ localReview.employeeType === 'Ex-employee' ? ' (Ex-Funcionário) ' : ' (Funcionário actual) ' }} </span>
-          <span class="text-md text-[#767676]"> em {{ getDay }} de {{ getMonth }} de {{ getYear }} </span>
+          <span class="text-[#767676] underline md:text-normal text-sm mr-1 dark:text-gray-300"> {{ localReview.jobTitle }} </span>
+          <span class="text-[#767676] dark:text-gray-300"> {{ localReview.employeeType === 'Ex-employee' ? ' (Ex-Funcionário) ' : ' (Funcionário actual) ' }} </span>
+          <span class="text-md text-[#767676] dark:text-gray-300"> em {{ getDay }} de {{ getMonth }} de {{ getYear }} </span>
         </div>
-        <h3 class="mt-3 text-[#767676] md:pr-0 pr-2">{{ localReview.comment?.comment }}</h3>
+        <h3 class="mt-3 text-[#767676] md:pr-0 pr-2 dark:text-gray-300">{{ localReview.comment?.comment }}</h3>
       </div>
       <div class="border-t-2 border-[#E4E2E0] py-3">
-        <h3 class="font-bold text-[#595959]">Recomendaria?</h3>
-        <span>{{ localReview.recommend ? 'Sim' : 'Não' }}.</span>
+        <h3 class="font-bold text-[#595959] dark:text-white">Recomendaria?</h3>
+        <span class="dark:text-gray-300">{{ localReview.recommend ? 'Sim' : 'Não' }}.</span>
       </div>
       <div>
-        <h3 class="font-bold text-[#595959]">Aspectos negativos:</h3>
-        <span class="md:pr-0 pr-4">{{ truncatedNegativeComment }}
+        <h3 class="font-bold text-[#595959] dark:text-white">Aspectos negativos:</h3>
+        <span class="md:pr-0 pr-4 dark:text-gray-300">{{ truncatedNegativeComment }}
             <span v-if="localReview.comment?.negativeAspects.length > 320" @click="toggleReadMoreNegativeComment"
-                  class="text-[#003f72] underline cursor-pointer">
+                  class="text-[#003f72] underline cursor-pointer dark:text-blue-500">
               {{ isExpandedNegativeComment ? "mostrar menos" : "saiba mais..." }}
             </span>
         </span>
       </div>
       <div class="my-5">
-        <h3 class="text-[#595959] font-bold">Aspectos positivos:</h3>
-        <span class="md:pr-0 pr-4">{{ truncatedPositiveComment }}
+        <h3 class="text-[#595959] font-bold dark:text-white">Aspectos positivos:</h3>
+        <span class="md:pr-0 pr-4 dark:text-gray-300">{{ truncatedPositiveComment }}
             <span v-if="localReview.comment?.positiveAspects.length > 320" @click="toggleReadMorePositiveComment"
-                  class="text-[#003f72] underline cursor-pointer">
+                  class="text-[#003f72] underline cursor-pointer dark:text-blue-500">
               {{ isExpandedPositiveComment ? "mostrar menos" : "saiba mais..." }}
             </span>
         </span>
@@ -230,15 +230,15 @@ onMounted(async () => {
         </div>
         <div v-else class="">
           <div v-if="localReview.usefulRate && localReview.usefulRate.useful > 0" class="flex flex-wrap justify-between mb-3">
-            <h1 class="text-md text-[#767676]">{{messageUseFulReview}}</h1>
-            <button @click="openShareModal" type="button" class="flex gap-2 items-center mr-4 hover:text-[#003f72] transition-colors">
+            <h1 class="text-md text-[#767676] dark:text-gray-300">{{messageUseFulReview}}</h1>
+            <button @click="openShareModal" type="button" class="flex gap-2 items-center mr-4 hover:text-[#003f72] transition-colors dark:text-gray-300">
               <img class="w-5 h-5" src="@/assets/img/share.svg" alt="Ícone de compartilhamento">
               Compartilhar
             </button>
           </div>
           <div v-if="!isUserUseFulReview" class="bg-gray-50 p-4 rounded-lg mt-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <span class="text-[#595959] font-medium">Esta avaliação foi útil?</span>
+              <span class="text-[#595959] font-medium dark:text-white">Esta avaliação foi útil?</span>
               <button
                 v-if="localReview.usefulRate.useful === 0"
                 type="button"
@@ -250,7 +250,7 @@ onMounted(async () => {
                   src="@/assets/img/share.svg"
                   alt="Ícone de compartilhamento"
                 />
-                <span>Compartilhar</span>
+                <span class="dark:text-gray-300">Compartilhar</span>
               </button>
             </div>
 
@@ -259,13 +259,13 @@ onMounted(async () => {
                 @click="handleUsefulReview(true)"
                 class="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-[#F3F2F1] text-[#595959] hover:bg-[#003f72] hover:text-white transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-[#003f72] focus:ring-opacity-50"
               >
-                <i class="bx bx-like mr-1.5"></i>Sim
+                <i class="bx bx-like mr-1.5 dark:text-gray-300"></i>Sim
               </button>
               <button
                 @click="handleUsefulReview(false)"
                 class="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-[#F3F2F1] text-[#595959] hover:bg-[#003f72] hover:text-white transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-[#003f72] focus:ring-opacity-50"
               >
-                <i class="bx bx-dislike mr-1.5"></i>Não
+                <i class="bx bx-dislike mr-1.5 dark:text-gray-300"></i>Não
               </button>
             </div>
           </div>
