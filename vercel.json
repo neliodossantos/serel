@@ -1,8 +1,9 @@
 {
+  "buildCommand": "npm run build:ssr",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/api/index.cjs"
     }
   ]
 }
