@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const indexHtml = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
+const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf-8')
 
 export default async (req, res) => {
   const url = req.url
