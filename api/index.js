@@ -20,14 +20,14 @@ export default async (req, res) => {
         page: 1,
         limit: 1
       })
-      const review = reviewResponse.data.data
+      const review = reviewResponse.data
 
       const companyResponse = await axios.post('https://serel-backend.onrender.com/api/company/getOne', {
         filter: { id: review.companyId },
         page: 1,
         limit: 1
       })
-      const company = companyResponse.data.data
+      const company = companyResponse.data
 
       const title = `${review.reviewTitle} - Avaliação de ${company.name}`
       const description = (review.comment?.comment || `Avaliação da empresa ${company.name} com ${review.score}/5 estrelas.`).substring(0, 160)
