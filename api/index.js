@@ -1,10 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-const axios = require('axios')
+import fs from 'fs'
+import path from 'path'
+import axios from 'axios'
+import { fileURLToPath } from 'url'
 
-const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf-8')
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-module.exports = async (req, res) => {
+const indexHtml = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
+
+export default async (req, res) => {
   const url = req.url
   let html = indexHtml
 
