@@ -8,6 +8,7 @@
     "build": "npm run type-check && npm run build-only",
     "preview": "vite preview",
     "build-only": "vite build",
+    "build:ssr": "vite build --ssr",
     "type-check": "vue-tsc --build --force",
     "serve": "serve -s dist",
     "build-and-serve": "npm run build && npm run serve"
