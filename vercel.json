@@ -1,9 +1,8 @@
 {
-  "buildCommand": "npm run build-only",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api/index.cjs"
+      "destination": "/index.html"
     }
   ]
 }
