@@ -90,7 +90,7 @@ export default async (req, res) => {
     const parts = pathname.split('/').filter(Boolean)
 
     /** 🏠 Página inicial */
-    if (parts.length === 0 || url === '/') {
+    if (parts.length === 0 || url === '/' || url === '') {
       metaData = {
         title: 'Serel - Compartilhe as suas experiências',
         description:
@@ -129,19 +129,6 @@ export default async (req, res) => {
         }
       }
     }
-
-    /** 📋 Página geral de empresas */
-    else if (parts[0] === 'overview' && parts[1] === 'company' && parts.length === 2) {
-      metaData = {
-        title: 'Empresas na Serel',
-        description:
-          'Veja a lista de empresas avaliadas pelos usuários da Serel e descubra suas reputações.',
-        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
-        url: `https://serel-frontend-delta.vercel.app${url}`,
-        type: 'website',
-      }
-    }
-
     /** 📝 Página de detalhes de review */
     else if (parts[0] === 'overview' && parts[1] === 'review' && parts[2] === 'details' && parts.length === 4) {
       const reviewId = parts[3]
@@ -175,7 +162,7 @@ export default async (req, res) => {
             }
 
             metaData = {
-              title: `${reviewTitle} - ${companyName}`,
+              title: `Avaliação - ${reviewTitle} na empresa ${companyName}`,
               description: comment.substring(0, 155),
               image: imageUrl,
               url: `https://serel-frontend-delta.vercel.app${url}`,
