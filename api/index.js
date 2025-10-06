@@ -86,9 +86,24 @@ export default async (req, res) => {
   }
 
   try {
+    const pathname = new URL(`https://serel-frontend-delta.vercel.app${url}`).pathname
+    const parts = pathname.split('/').filter(Boolean)
+
+    /** 🏠 Página inicial */
+    if (parts.length === 0 || url === '/') {
+      metaData = {
+        title: 'Serel - Compartilhe as suas experiências',
+        description:
+          'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
+        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        url: 'https://serel-frontend-delta.vercel.app/',
+        type: 'website',
+      }
+    }
+
     /** 🏢 Página da empresa */
-    if (url.startsWith('/overview/company/')) {
-      const companyId = url.split('/').filter(Boolean)[3]
+    else if (parts[0] === 'overview' && parts[1] === 'company' && parts.length === 3) {
+      const companyId = parts[2]
       if (companyId) {
         const { data: company } = await axios.post(
           'https://serel-backend.onrender.com/api/company/getOne',
@@ -115,9 +130,21 @@ export default async (req, res) => {
       }
     }
 
+    /** 📋 Página geral de empresas */
+    else if (parts[0] === 'overview' && parts[1] === 'company' && parts.length === 2) {
+      metaData = {
+        title: 'Empresas na Serel',
+        description:
+          'Veja a lista de empresas avaliadas pelos usuários da Serel e descubra suas reputações.',
+        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        url: `https://serel-frontend-delta.vercel.app${url}`,
+        type: 'website',
+      }
+    }
+
     /** 📝 Página de detalhes de review */
-    else if (url.startsWith('/overview/review/details/')) {
-      const reviewId = url.split('/').filter(Boolean)[3]
+    else if (parts[0] === 'overview' && parts[1] === 'review' && parts[2] === 'details' && parts.length === 4) {
+      const reviewId = parts[3]
       if (reviewId) {
         const { data: review } = await axios.post(
           'https://serel-backend.onrender.com/api/review/getOne',
@@ -160,8 +187,9 @@ export default async (req, res) => {
         }
       }
     }
+
     /** ℹ️ Página sobre */
-    else if (url.startsWith('/about')) {
+    else if (parts[0] === 'about') {
       metaData = {
         title: 'Sobre a Serel',
         description:
@@ -171,8 +199,9 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** 📞 Página de contato */
-    else if (url.startsWith('/contact')) {
+    else if (parts[0] === 'contact') {
       metaData = {
         title: 'Contato - Serel',
         description:
@@ -181,20 +210,14 @@ export default async (req, res) => {
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
-    }else{
-      // Página inicial ou outras páginas
-      metaData = {
-        title: 'Serel - Compartilhe as suas experiências',
-        description:
-          'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
-        url: `https://serel-frontend-delta.vercel.app${url}`,
-        type: 'website',
-      }
     }
+
+    /** 🌐 Outras páginas (fallback) */
+    // O else foi removido pois o metaData padrão já está definido no início
       
   } catch (err) {
     console.error('Erro ao gerar metadados:', err.message)
+    // Em caso de erro, mantém os metadados padrão já definidos
   }
 
   const metaTags = generateMetaTags(metaData)
