@@ -29,7 +29,7 @@ const userStore = useUserStore();
 // Dynamic meta tags for SEO and social sharing
 const metaTitle = computed(() => {
   if (review.reviewTitle && company.name) {
-    return `${review.reviewTitle} - Avaliação da empresa ${company.name}`;
+    return `${review.reviewTitle} - Avaliação da empresa - ${company.name}`;
   }
   return 'Avaliação de Empresa - Serel';
 });
@@ -82,7 +82,6 @@ onMounted(async () => {
     isLoading.value = true;
     hasError.value = false;
 
-    // Verificar se está online
     if (!navigator.onLine) {
       hasError.value = true;
       errorMessage.value = 'Sem conexão com a internet. Verifique sua rede e tente novamente.';

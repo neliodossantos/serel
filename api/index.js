@@ -1,4 +1,3 @@
-// api/ssr.js (ou server.js para Vercel)
 import fs from 'fs'
 import path from 'path'
 import axios from 'axios'
@@ -7,46 +6,36 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Carregar o template HTML
 let template
 try {
-  template = fs.readFileSync(
-    path.join(__dirname, '../dist/index.html'),
-    'utf-8'
-  )
-} catch (e) {
-  // Fallback para desenvolvimento
-  template = fs.readFileSync(
-    path.join(__dirname, '../index.html'),
-    'utf-8'
-  )
+  template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
+} catch {
+  template = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf-8')
 }
 
-// Função para sanitizar texto
-const sanitize = (text) => {
-  if (!text) return ''
-  return String(text)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\n/g, ' ')
-    .replace(/\r/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
+const sanitize = (text) =>
+  text
+    ? String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\n/g, ' ')
+        .replace(/\r/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+    : ''
 
-// Função para gerar meta tags
 const generateMetaTags = (data) => {
   const {
-    title = 'Serel - Compartilhe as suas experiências',
-    description = 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-    image = 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
-    url = 'https://serel-frontend-delta.vercel.app',
-    type = 'website',
+    title,
+    description,
+    image,
+    url,
+    type,
     publishedTime = null,
-    author = null
+    author = null,
   } = data
 
   return `
@@ -84,118 +73,132 @@ const generateMetaTags = (data) => {
 }
 
 export default async (req, res) => {
-  const url = req.url || req.path || '/'
+  const url = req.url || '/'
   let html = template
 
-  // Dados padrão
   let metaData = {
     title: 'Serel - Compartilhe as suas experiências',
-    description: 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
+    description:
+      'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
     image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
     url: `https://serel-frontend-delta.vercel.app${url}`,
-    type: 'website'
+    type: 'website',
   }
 
-  // Se for página de review
-  if (url.startsWith('/overview/review/details/')) {
-    const reviewId = url.split('/').filter(Boolean)[3] // overview/review/details/ID
-    
-    if (reviewId) {
-      try {
-        console.log('Fetching review:', reviewId)
-        
-        // Buscar review
-        const reviewResponse = await axios.post(
-          'https://serel-backend.onrender.com/api/review/getOne',
-          {
-            filter: { id: reviewId },
-            page: 1,
-            limit: 1
-          },
-          {
-            timeout: 5000,
-            headers: { 'Content-Type': 'application/json' }
-          }
+  try {
+    /** 🏠 Página inicial */
+    if (url === '/' || url === '/home') {
+      metaData = {
+        title: 'Serel - Avalie empresas e compartilhe experiências',
+        description:
+          'Descubra e avalie empresas em Angola. Compartilhe suas experiências e veja o que outros pensam sobre os locais onde trabalharam ou foram atendidos.',
+        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        url: 'https://serel-frontend-delta.vercel.app/',
+        type: 'website',
+      }
+    }
+
+    /** 🏢 Página da empresa */
+    else if (url.startsWith('/company/')) {
+      const companyId = url.split('/').filter(Boolean)[1]
+      if (companyId) {
+        const { data: company } = await axios.post(
+          'https://serel-backend.onrender.com/api/company/getOne',
+          { filter: { id: companyId } },
+          { headers: { 'Content-Type': 'application/json' } }
         )
-        
-        const review = reviewResponse.data
+        if (company && company.id) {
+          const logo =
+            company.logo && company.logo.startsWith('http')
+              ? company.logo
+              : `https://serel-frontend-delta.vercel.app${company.logo}`
+
+          metaData = {
+            title: `${sanitize(company.name)} - Avaliações e opiniões`,
+            description: sanitize(
+              company.description ||
+                `Veja avaliações e comentários sobre ${company.name} na Serel.`
+            ),
+            image: logo,
+            url: `https://serel-frontend-delta.vercel.app${url}`,
+            type: 'article',
+          }
+        }
+      }
+    }
+
+    /** 📝 Página de detalhes de review */
+    else if (url.startsWith('/overview/review/details/')) {
+      const reviewId = url.split('/').filter(Boolean)[3]
+      if (reviewId) {
+        const { data: review } = await axios.post(
+          'https://serel-backend.onrender.com/api/review/getOne',
+          { filter: { id: reviewId } },
+          { headers: { 'Content-Type': 'application/json' } }
+        )
 
         if (review && review.id) {
-          // Buscar empresa
-          const companyResponse = await axios.post(
+          const { data: company } = await axios.post(
             'https://serel-backend.onrender.com/api/company/getOne',
-            {
-              filter: { id: review.companyId },
-              page: 1,
-              limit: 1
-            },
-            {
-              timeout: 5000,
-              headers: { 'Content-Type': 'application/json' }
-            }
+            { filter: { id: review.companyId } },
+            { headers: { 'Content-Type': 'application/json' } }
           )
-          
-          const company = companyResponse.data
 
           if (company && company.id) {
-            // Sanitizar dados
             const reviewTitle = sanitize(review.reviewTitle || 'Avaliação')
             const companyName = sanitize(company.name || 'Empresa')
             const comment = sanitize(
-              review.comment?.comment || 
-              `Avaliação da empresa ${companyName} com ${review.score}/5 estrelas.`
+              review.comment?.comment ||
+                `Avaliação da empresa ${companyName} com ${review.score}/5 estrelas.`
             )
 
-            // Preparar imagem
-            let imageUrl = company.logo || 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png'
+            let imageUrl =
+              company.logo ||
+              'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png'
             if (!imageUrl.startsWith('http')) {
               imageUrl = `https://serel-frontend-delta.vercel.app${imageUrl}`
             }
 
-            // Atualizar metaData
             metaData = {
-              title: `${reviewTitle} - Avaliação de ${companyName}`,
+              title: `${reviewTitle} - ${companyName}`,
               description: comment.substring(0, 155),
               image: imageUrl,
               url: `https://serel-frontend-delta.vercel.app${url}`,
               type: 'article',
               publishedTime: review.createdAt || null,
-              author: sanitize(review.jobTitle || 'Anônimo')
+              author: sanitize(review.jobTitle || 'Anônimo'),
             }
-
-            console.log('Meta data generated:', metaData.title)
           }
         }
-      } catch (error) {
-        console.error('Error fetching review data:', error.message)
-        // Continua com dados padrão
       }
     }
+
+    /** ℹ️ Página sobre */
+    else if (url.startsWith('/about')) {
+      metaData = {
+        title: 'Sobre a Serel',
+        description:
+          'Saiba mais sobre a missão da Serel e como ajudamos as pessoas a compartilharem suas experiências.',
+        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        url: `https://serel-frontend-delta.vercel.app${url}`,
+        type: 'website',
+      }
+    }
+  } catch (err) {
+    console.error('Erro ao gerar metadados:', err.message)
   }
 
-  // Gerar meta tags
   const metaTags = generateMetaTags(metaData)
+  html = html
+    .replace(/<title>.*?<\/title>/i, `<title>${metaData.title}</title>`)
+    .replace(
+      /<meta name="description" content=".*?">/i,
+      `<meta name="description" content="${metaData.description}">`
+    )
+    .replace(/<!-- SSR_META_TAGS -->/, metaTags)
 
-  // Substituir no HTML
-  // 1. Title
-  html = html.replace(
-    /<title>.*?<\/title>/i,
-    `<title>${metaData.title}</title>`
-  )
-  // 2. Description
-  html = html.replace(
-    /<meta name="description" content=".*?">/i,
-    `<meta name="description" content="${metaData.description}">`
-  )
-  // 3. Inserir meta tags completas
-  html = html.replace(
-    /<!-- SSR_META_TAGS -->/,
-    metaTags
-  )
-  // Headers HTTP
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
   res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
   res.setHeader('X-Robots-Tag', 'index, follow')
-
   res.status(200).end(html)
 }
