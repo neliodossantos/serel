@@ -29,7 +29,7 @@ const userStore = useUserStore();
 // Dynamic meta tags for SEO and social sharing
 const metaTitle = computed(() => {
   if (review.reviewTitle && company.name) {
-    return `${review.reviewTitle} - Avaliação de ${company.name}`;
+    return `${review.reviewTitle} - Avaliação da empresa ${company.name}`;
   }
   return 'Avaliação de Empresa - Serel';
 });

@@ -297,7 +297,7 @@ onMounted(async () => {
           title="Compartilhar no Facebook"
         >
           <i class="bx bxl-facebook text-2xl"></i>
-          <span class="text-xs text-gray-600">Facebook</span>
+          <span class="text-xs text-gray-600 hidden sm:block">Facebook</span>
         </button>
 
         <!-- Twitter -->
@@ -307,7 +307,7 @@ onMounted(async () => {
           title="Compartilhar no Twitter"
         >
           <i class="bx bxl-twitter text-2xl"></i>
-          <span class="text-xs text-gray-600">Twitter</span>
+          <span class="text-xs text-gray-600 hidden sm:block">Twitter</span>
         </button>
 
         <!-- WhatsApp -->
@@ -317,7 +317,7 @@ onMounted(async () => {
           title="Compartilhar no WhatsApp"
         >
           <i class="bx bxl-whatsapp text-2xl"></i>
-          <span class="text-xs text-gray-600">WhatsApp</span>
+          <span class="text-xs text-gray-600 hidden sm:block">WhatsApp</span>
         </button>
 
         <!-- Instagram -->
@@ -327,7 +327,7 @@ onMounted(async () => {
           title="Compartilhar no Instagram"
         >
           <i class="bx bxl-instagram text-2xl"></i>
-          <span class="text-xs text-gray-600">Instagram</span>
+          <span class="text-xs text-gray-600 hidden sm:block">Instagram</span>
         </button>
 
         <!-- LinkedIn -->
@@ -337,7 +337,7 @@ onMounted(async () => {
           title="Compartilhar no LinkedIn"
         >
           <i class="bx bxl-linkedin text-2xl"></i>
-          <span class="text-xs text-gray-600">LinkedIn</span>
+          <span class="text-xs text-gray-600 hidden sm:block">LinkedIn</span>
         </button>
       </div>
 
