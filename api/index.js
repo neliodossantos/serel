@@ -86,21 +86,9 @@ export default async (req, res) => {
   }
 
   try {
-    /** 🏠 Página inicial */
-    if (url === '/' || url === '/home') {
-      metaData = {
-        title: 'Serel - Avalie empresas e compartilhe experiências',
-        description:
-          'Descubra e avalie empresas em Angola. Compartilhe suas experiências e veja o que outros pensam sobre os locais onde trabalharam ou foram atendidos.',
-        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
-        url: 'https://serel-frontend-delta.vercel.app/',
-        type: 'website',
-      }
-    }
-
     /** 🏢 Página da empresa */
-    else if (url.startsWith('/company/')) {
-      const companyId = url.split('/').filter(Boolean)[1]
+    if (url.startsWith('/overview/company/')) {
+      const companyId = url.split('/').filter(Boolean)[3]
       if (companyId) {
         const { data: company } = await axios.post(
           'https://serel-backend.onrender.com/api/company/getOne',
@@ -172,7 +160,6 @@ export default async (req, res) => {
         }
       }
     }
-
     /** ℹ️ Página sobre */
     else if (url.startsWith('/about')) {
       metaData = {
@@ -184,6 +171,28 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+    /** 📞 Página de contato */
+    else if (url.startsWith('/contact')) {
+      metaData = {
+        title: 'Contato - Serel',
+        description:
+          'Entre em contato com a equipe da Serel para suporte ou perguntas.',
+        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        url: `https://serel-frontend-delta.vercel.app${url}`,
+        type: 'website',
+      }
+    }else{
+      // Página inicial ou outras páginas
+      metaData = {
+        title: 'Serel - Compartilhe as suas experiências',
+        description:
+          'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
+        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        url: `https://serel-frontend-delta.vercel.app${url}`,
+        type: 'website',
+      }
+    }
+      
   } catch (err) {
     console.error('Erro ao gerar metadados:', err.message)
   }
