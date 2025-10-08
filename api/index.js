@@ -76,6 +76,7 @@ export default async (req, res) => {
   const url = req.url || '/'
   let html = template
 
+  // Metadados padrão da página inicial
   let metaData = {
     title: 'Serel - Compartilhe as suas experiências',
     description:
@@ -90,7 +91,7 @@ export default async (req, res) => {
     const parts = pathname.split('/').filter(Boolean)
 
     /** 🏠 Página inicial */
-    if (parts.length === 0 || url === '/' || url === '') {
+    if (parts.length === 0) {
       metaData = {
         title: 'Serel - Compartilhe as suas experiências',
         description:
@@ -199,12 +200,11 @@ export default async (req, res) => {
       }
     }
 
-    /** 🌐 Outras páginas (fallback) */
-    // O else foi removido pois o metaData padrão já está definido no início
+    // Para outras rotas, os metadados padrão já estão definidos
       
   } catch (err) {
     console.error('Erro ao gerar metadados:', err.message)
-    // Em caso de erro, mantém os metadados padrão já definidos
+    // Em caso de erro, mantém os metadados padrão
   }
 
   const metaTags = generateMetaTags(metaData)
