@@ -10,35 +10,6 @@ import { useToast } from "@/composables/useToast";
 import ToastContainer from "@/components/toast/ToastContainer.vue";
 import { useNewsletterStore } from "@/stores/newslatter";
 import { validators } from "@/utils/validators/validators";
-import { useHead } from "@vueuse/head";
-
-useHead({
-  title: 'Serel - Compartilhe as suas experiências',
-  meta: [
-    { name: 'description', content: 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://serel-frontend-delta.vercel.app/' },
-    { property: 'og:title', content: 'Serel - Compartilhe as suas experiências' },
-    { property: 'og:description', content: 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.' },
-    { property: 'og:image', content: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg' },
-    { property: 'og:image:secure_url', content: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg' },
-    { property: 'og:image:type', content: 'image/jpeg' },
-    { property: 'og:image:width', content: '1280' },
-    { property: 'og:image:height', content: '320' },
-    { property: 'og:image:alt', content: 'Serel - Compartilhe as suas experiências' },
-    { property: 'og:site_name', content: 'Serel' },
-    { property: 'og:locale', content: 'pt_AO' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:url', content: 'https://serel-frontend-delta.vercel.app/' },
-    { name: 'twitter:title', content: 'Serel - Compartilhe as suas experiências' },
-    { name: 'twitter:description', content: 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.' },
-    { name: 'twitter:image', content: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg' },
-    { name: 'twitter:image:alt', content: 'Serel - Compartilhe as suas experiências' },
-  ],
-  link: [
-    { rel: 'canonical', href: 'https://serel-frontend-delta.vercel.app/' },
-  ],
-});
 
 const route = useRoute();
 const search = ref("");
