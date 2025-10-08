@@ -96,9 +96,9 @@ export default async (req, res) => {
     console.log(pathname);
 
     /** 🏠 Página inicial */
-    if (parts[0] === '/') {
+    if (parts[0] === '/' || parts.length === 0 || pathname === 'https://serel-frontend-delta.vercel.app/') {
       metaData = {
-        title: 'Serel - Compartilhe as suas experiências',
+        title: 'Serel - Página Inicial',
         description:
           'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
         image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
