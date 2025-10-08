@@ -38,36 +38,39 @@ const generateMetaTags = (data) => {
     author = null,
   } = data
 
+  const imageType = image && image.toLowerCase().endsWith('.jpg') || image.toLowerCase().endsWith('.jpeg') ? 'image/jpeg' : 'image/png'
+
   return `
     <!-- Primary Meta Tags -->
-    <meta name="title" content="${title ? title : 'Serel - Compartilhe as suas experiências'}">
-    <meta name="description" content="${description ? description : 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.'}">
-    
+    <meta name="title" content="${title}">
+    <meta name="description" content="${description}">
+
     <!-- Open Graph / Facebook / LinkedIn -->
-    <meta property="og:type" content="${type ? type : 'website'}">
-    <meta property="og:url" content="${url ? url : 'https://serel-frontend-delta.vercel.app/'}">
-    <meta property="og:title" content="${title ? title : 'Serel - Compartilhe as suas experiências'}">
+    <meta property="og:type" content="${type}">
+    <meta property="og:url" content="${url}">
+    <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
-    <meta property="og:image" content="${image ? image : 'https://serel-frontend-delta.vercel.app/banner_serel.jpg'}">
-    <meta property="og:image:secure_url" content="${image ? image : 'https://serel-frontend-delta.vercel.app/banner_serel.jpg'}">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="${image}">
+    <meta property="og:image:secure_url" content="${image}">
+    <meta property="og:image:type" content="${imageType}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="${title ? title : 'Serel - Compartilhe as suas experiências'}">
+    <meta property="og:image:alt" content="${title}">
     <meta property="og:site_name" content="Serel">
     <meta property="og:locale" content="pt_AO">
     ${publishedTime ? `<meta property="article:published_time" content="${publishedTime}">` : ''}
     ${author ? `<meta property="article:author" content="${author}">` : ''}
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="${url ? url : 'https://serel-frontend-delta.vercel.app/'}">
-    <meta name="twitter:title" content="${title ? title : 'Serel - Compartilhe as suas experiências'}">
-    <meta name="twitter:description" content="${description ? description : 'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.'}">
-    <meta name="twitter:image" content="${image ? image : 'https://serel-frontend-delta.vercel.app/banner_serel.jpg'}">
-    <meta name="twitter:image:alt" content="${title ? title : 'Serel - Compartilhe as suas experiências'}">
+    <meta name="twitter:url" content="${url}">
+    <meta name="twitter:title" content="${title}">
+    <meta name="twitter:description" content="${description}">
+    <meta name="twitter:image" content="${image}">
+    <meta name="twitter:image:alt" content="${title}">
+
     <!-- Canonical -->
-    <link rel="canonical" href="${url ? url : 'https://serel-frontend-delta.vercel.app/'}">
+    <link rel="canonical" href="${url}">
   `
 }
 
@@ -208,6 +211,7 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** 🔍 Página de filtro */
     else if (parts[0] === 'filter') {
       metaData = {
@@ -218,6 +222,7 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** 🔐 Página de login */
     else if (parts[0] === 'login') {
       metaData = {
@@ -228,6 +233,7 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** 📝 Página de registro */
     else if (parts[0] === 'signup') {
       metaData = {
@@ -238,6 +244,7 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** 🔑 Página de esqueci senha */
     else if (parts[0] === 'forgot-password') {
       metaData = {
@@ -248,6 +255,7 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** ✅ Página de confirmar conta */
     else if (parts[0] === 'confirm-account') {
       metaData = {
@@ -258,6 +266,7 @@ export default async (req, res) => {
         type: 'website',
       }
     }
+
     /** 🔄 Página de redefinir senha */
     else if (parts[0] === 'reset-password') {
       metaData = {
@@ -473,6 +482,16 @@ export default async (req, res) => {
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
+    }else{
+      // Mantém os metadados padrão já definidos no início 
+      metaData = {
+        title: 'Serel - Compartilhe as suas experiências',
+        description:
+          'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
+        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        url: `https://serel-frontend-delta.vercel.app${url}`,
+        type: 'website',
+      }      
     }
 
     /** 🌐 Outras páginas (fallback) */
