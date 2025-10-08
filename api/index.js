@@ -90,9 +90,13 @@ export default async (req, res) => {
   try {
     const pathname = new URL(`https://serel-frontend-delta.vercel.app${url}`).pathname
     const parts = pathname.split('/').filter(Boolean)
+    
+    
+    console.log(parts);
+    console.log(pathname);
 
     /** 🏠 Página inicial */
-    if (parts.length === 0 || url === '/' || url === '') {
+    if (parts[0] === '/') {
       metaData = {
         title: 'Serel - Compartilhe as suas experiências',
         description:
