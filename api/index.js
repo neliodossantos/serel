@@ -90,20 +90,8 @@ export default async (req, res) => {
     const pathname = new URL(`https://serel-frontend-delta.vercel.app${url}`).pathname
     const parts = pathname.split('/').filter(Boolean)
 
-    /** 🏠 Página inicial */
-    if (parts.length === 0 || pathname === 'https://serel-frontend-delta.vercel.app/') {
-      metaData = {
-        title: 'Serel - Compartilhe as suas experiências',
-        description:
-          'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
-        url: 'https://serel-frontend-delta.vercel.app/',
-        type: 'website',
-      }
-    }
-
     /** 🏢 Página da empresa */
-    else if (parts[0] === 'overview' && parts[1] === 'company' && parts.length === 3) {
+    if (parts[0] === 'overview' && parts[1] === 'company' && parts.length === 3) {
       const companyId = parts[2]
       if (companyId) {
         const { data: company } = await axios.post(
@@ -174,34 +162,16 @@ export default async (req, res) => {
           }
         }
       }
-    }
-
-    /** ℹ️ Página sobre */
-    else if (parts[0] === 'about') {
+    }else {
       metaData = {
-        title: 'Sobre a Serel',
+        title: 'Serel - Compartilhe as suas experiências',
         description:
-          'Saiba mais sobre a missão da Serel e como ajudamos as pessoas a compartilharem suas experiências.',
+          'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
         image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: 'https://serel-frontend-delta.vercel.app/',
         type: 'website',
       }
-    }
-
-    /** 📞 Página de contato */
-    else if (parts[0] === 'contact') {
-      metaData = {
-        title: 'Contato - Serel',
-        description:
-          'Entre em contato com a equipe da Serel para suporte ou perguntas.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
-        url: `https://serel-frontend-delta.vercel.app${url}`,
-        type: 'website',
-      }
-    }
-
-    // Para outras rotas, os metadados padrão já estão definidos
-      
+    } 
   } catch (err) {
     console.error('Erro ao gerar metadados:', err.message)
     // Em caso de erro, mantém os metadados padrão
