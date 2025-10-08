@@ -53,8 +53,8 @@ const generateMetaTags = (data) => {
     <meta property="og:image" content="${image}">
     <meta property="og:image:secure_url" content="${image}">
     <meta property="og:image:type" content="${imageType}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="320">
     <meta property="og:image:alt" content="${title}">
     <meta property="og:site_name" content="Serel">
     <meta property="og:locale" content="pt_AO">
