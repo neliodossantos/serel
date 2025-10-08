@@ -80,7 +80,7 @@ export default async (req, res) => {
     title: 'Serel - Compartilhe as suas experiências',
     description:
       'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-    image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+    image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
     url: `https://serel-frontend-delta.vercel.app${url}`,
     type: 'website',
   }
@@ -95,7 +95,7 @@ export default async (req, res) => {
         title: 'Serel - Compartilhe as suas experiências',
         description:
           'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
         url: 'https://serel-frontend-delta.vercel.app/',
         type: 'website',
       }
@@ -181,7 +181,7 @@ export default async (req, res) => {
         title: 'Sobre a Serel',
         description:
           'Saiba mais sobre a missão da Serel e como ajudamos as pessoas a compartilharem suas experiências.',
-        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -193,7 +193,7 @@ export default async (req, res) => {
         title: 'Contato - Serel',
         description:
           'Entre em contato com a equipe da Serel para suporte ou perguntas.',
-        image: 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png',
+        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
