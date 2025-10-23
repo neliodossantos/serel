@@ -41,7 +41,7 @@ function toggleSuccessRequest(value : boolean){
     <div v-else class="w-full h-screen flex items-center justify-center">
       <div class="p-5 md:p-0 max-w-2xl flex flex-col gap-5">
           <i class="block mx-auto bx bxs-check-circle text-[#003F72] animate-bounce text-7xl"></i>
-          <h2 class="text-center text-3xl md:text-4xl md:max-w-2xl font-bold text-white">
+          <h2 class="text-center text-3xl md:text-4xl md:max-w-2xl font-bold">
             Avaliação foi enviada com sucesso! 🎉 
           </h2>
           <div class="bg-gray-100 p-4 rounded-lg text-left">
@@ -64,7 +64,7 @@ function toggleSuccessRequest(value : boolean){
                   </div>
               </div>
           </div>            
-          <p class="text-gray-500 dark:text-gray-300 text-center text-base">
+          <p class="text-gray-500 text-center text-base">
               Será analisada pela nossa equipe, avaliação ficará visível para os outros usuários. 😊
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -74,7 +74,7 @@ function toggleSuccessRequest(value : boolean){
                   Página Inicial
               </a>
               <a href="/filter?q="
-                  class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#003F72] text-[#003F72] dark:text-white dark:border-white dark:border hover:dark:bg-[#003F72] hover:dark:border-none rounded-lg hover:bg-gray-50 transition-all transform hover:scale-105">
+                  class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#003F72] text-[#003F72] rounded-lg hover:bg-gray-50 transition-all transform hover:scale-105">
                   <i class='bx bx-search'></i>
                   Explorar Empresas
               </a>
@@ -133,17 +133,17 @@ function toggleSuccessRequest(value : boolean){
           </div>
         </div>
       </ModalComponent>
-      <div class="w-full bg-[#F8FAFB] dark:bg-[#000e1c] md:h-[500px] sm:py-10 mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]">
+      <div class="w-full bg-[#F8FAFB] md:h-[500px] sm:py-10 mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]">
         <div class="w-full flex pt-12 md:pt-0 md:pb-0 pb-12 md:gap-[64px] flex-wrap items-center justify-between">
           <div class="w-full px-[12%]">
             <div class="flex items-center gap-[64px] justify-between">
               <div class="flex-1 text-center pb-8">
-                <button class="text-xs md:text-base dark:text-white border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2">
-                  <i class='bx bx-star text-lg sm:text-xl 2xl:text-2xl text-[#003F72] dark:text-white' ></i>
+                <button class="text-xs md:text-base border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2">
+                  <i class='bx bx-star text-lg sm:text-xl 2xl:text-2xl  text-[#003F72]' ></i>
                   Avaliações reais de funcionários</button>
-                <h1 class="hidden sm:block text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-xl mx-auto text-[#2D2D2D] dark:text-white">Avalie Empresas Compartilhe Críticas, Salários e Experiências!</h1>
-                <h1 class="block sm:hidden text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl w-full text-[#2D2D2D] dark:text-white">Avalie Empresas Compartilhe Críticas, Salários</h1>
-                <p class="hidden md:block text-xl md:text-2xl max-w-[800px] mx-auto dark:text-gray-300">Compartilhe suas experiências profissionais, avalie empresas, revele salários e ajude a construir um mercado de trabalho mais transparente!</p>
+                <h1 class="hidden sm:block text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-xl mx-auto text-[#2D2D2D]">Avalie Empresas Compartilhe Críticas, Salários e Experiências!</h1>
+                <h1 class="block sm:hidden text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl w-full text-[#2D2D2D]">Avalie Empresas Compartilhe Críticas, Salários</h1>
+                <p class="hidden md:block text-xl md:text-2xl max-w-[800px] mx-auto">Compartilhe suas experiências profissionais, avalie empresas, revele salários e ajude a construir um mercado de trabalho mais transparente!</p>
               </div>
             </div>
           </div>

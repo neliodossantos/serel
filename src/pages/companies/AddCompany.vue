@@ -28,7 +28,7 @@ onMounted( ()=>{
     <div v-else class="w-full h-screen flex items-center justify-center">
       <div class="p-5 md:p-0 max-w-2xl flex flex-col gap-5">
           <i class="block mx-auto bx bxs-check-circle text-[#003F72] animate-bounce text-7xl"></i>
-          <h2 class="text-center text-3xl md:text-4xl md:max-w-2xl font-bold dark:text-white">
+          <h2 class="text-center text-3xl md:text-4xl md:max-w-2xl font-bold">
             Solicitação para adicionar empresa foi recebida com sucesso! 🎉 
           </h2>
           <div class="bg-gray-100 p-4 rounded-lg text-left">
@@ -55,7 +55,7 @@ onMounted( ()=>{
                   </div>
               </div>
           </div>            
-          <p class="text-gray-500 text-center text-base dark:text-gray-300">
+          <p class="text-gray-500 text-center text-base">
               Após a aprovação, a empresa ficará disponível para avaliar.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -65,7 +65,7 @@ onMounted( ()=>{
                   Página Inicial
               </a>
               <a href="/filter?q="
-                  class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#003F72] text-[#003F72] dark:text-white dark:border-white dark:border hover:dark:bg-[#003F72] hover:dark:border-none rounded-lg hover:bg-gray-50 transition-all transform hover:scale-105">
+                  class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#003F72] text-[#003F72] rounded-lg hover:bg-gray-50 transition-all transform hover:scale-105">
                   <i class='bx bx-search'></i>
                   Explorar Empresas
               </a>
@@ -76,7 +76,7 @@ onMounted( ()=>{
   <div v-else>
     <PreloaderComponent v-if="isLoading"></PreloaderComponent>
     <MainLayout v-else>
-      <div class="w-full bg-[#F8FAFB] dark:bg-[#000e1c] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
+      <div class="w-full bg-[#F8FAFB] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
       <div class=" w-full mb-24 px-[12%]">
         <div class="mx-auto relative max-w-[400px] sm:max-w-[600px] md:max-w-[900px]">
           <a class="left-30 max-w-[150px] h-[150px] block -top-[11rem] md:-top-44 absolute cursor-pointer" href="/">

@@ -5,9 +5,7 @@ import {validators} from "@/utils/validators/validators";
 import {useUserStore} from "@/stores/users";
 import ToastContainer from "@/components/toast/ToastContainer.vue";
 import {useToast} from "@/composables/useToast";
-import { useTheme } from "@/composables/useTheme";
 
-const { isDark } = useTheme();
 const toast = useToast();
 const userStore = useUserStore();
 const requestSuccessful = ref(false);
@@ -47,19 +45,18 @@ const handleSubmit = async () => {
 </script>
 <template>
   <AuthLayout>
-    <div class="py-[30px] md:py-[80px] md:px-[50px] bg-white dark:bg-transparent md:w-[460px] md:min-h-[300px] box-border mx-auto rounded-[16px] md:shadow-lg">
+    <div class="py-[30px] md:py-[80px] md:px-[50px] bg-white  md:w-[460px] md:min-h-[300px] box-border mx-auto rounded-[16px] md:shadow-lg">
       <div class="mb-5">
         <a href="/">
-            <img v-if="isDark" class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo_white.png" alt="">
-            <img v-else class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo.png" alt="">
+          <img class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo.png" alt="">
         </a>
       </div>
       <div v-if="!requestSuccessful" class="">
-        <h1 class="my-1 font-[700] text-2xl dark:text-white">Esqueceu a palavra-passe?</h1>
-        <p class="text-[14px] text-[#344054] font-[500] dark:text-gray-300">Insira o endereço de e-mail institucional, nós lhe enviaremos instruções para redefinir sua palavra-passe.</p>
+        <h1 class="my-1 font-[700] text-2xl">Esqueceu a palavra-passe?</h1>
+        <p class="text-[14px] text-[#344054] font-[500]">Insira o endereço de e-mail institucional, nós lhe enviaremos instruções para redefinir sua palavra-passe.</p>
         <form @submit.prevent="handleSubmit" class="">
           <div class="relative w-full flex flex-col mt-2 mb-2 gap-1">
-            <span class="text-[#344054] text-[0.9rem] font-[500] dark:text-gray-300">Endereço de email</span>
+            <span class="text-[#344054] text-[0.9rem] font-[500]">Endereço de email</span>
             <input type="email" v-model="email" :class="!errors.email.valid ? 'border-red-400 focus:ring-red-400' : ''" class="w-full pl-[2.5rem] py-2.5 border  border-[#003F72] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder:text-[14px]"
                    placeholder="Escreva aqui o seu email"/>
             <button type="button" class="absolute inset-y-0 top-7 left-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none">
@@ -69,7 +66,7 @@ const handleSubmit = async () => {
           <div class="">
             <span class="text-red-400 text-sm" v-if="!errors.email.valid">{{errors.email.message}}</span>
           </div>
-          <div class="mt-6">
+          <div class="">
             <button type="submit" :disabled="isLoading" :class="{'disable' : isLoading }"  class="flex items-center gap-3 justify-center mt-3 bg-[#003F72] text-white w-full py-[10px] px-[20px] rounded-[12px] font-bold">
               {{ isLoading ? 'Processando...' : 'Recuperar'}}
               <div v-if="isLoading" class="animate-spin rounded-full h-4 w-4 border-t-4 border-blue-500 border-solid"></div>

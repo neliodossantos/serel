@@ -69,7 +69,7 @@ onMounted(async () => {
   />
   <PreloaderComponent v-else-if="isLoading"></PreloaderComponent>
   <MainLayout v-else>
-    <div class="w-full bg-[#F8FAFB] flex items-center md:border-none border-b border-[#D4D2D0] md:py-0 dark:bg-[#000e1c] dark:text-white">
+    <div class="w-full bg-[#F8FAFB] flex items-center md:border-none border-b border-[#D4D2D0] md:py-0">
       <div class="w-full mt-10 md:mt-20 min-h-auto px-[12%]">
         <div class="flex lg:gap-16 justify-between items-center flex-wrap gap-4 xs:gap-2">
           <div class="flex items-start gap-5">
@@ -85,7 +85,7 @@ onMounted(async () => {
                   <span class="xxs:text-sm text-md ml-1">{{company.rating?.average ?  company.rating?.average : 0 }}/5</span>
                 </div>
               </div>
-              <span class="block xs:hidden text-sm text-gray-500 underline dark:text-gray-200">{{company.sector}}</span>
+              <span class="block xs:hidden text-sm text-gray-500 underline">{{company.sector}}</span>
             </div>
           </div>
           <div class="w-full xs:max-w-72 sm:max-w-md rounded md:w-auto">
@@ -95,9 +95,9 @@ onMounted(async () => {
         <div class="xs:my-5 my-10">
           <div class="">
             <ul class="md:border-b md:border-gray-300 flex gap-3">
-              <li class="list-none pb-1"><a :href="'/overview/company/' + company.id" class="cursor-pointer text-[#003F72] text-md  py-4 font-bold dark:text-blue-500">Visão Geral</a></li>
-              <li class="list-none pb-1 border-b-[4px] border-[#003F72] dark:border-blue-500"><a :href="'/reviews/company/' + company.id" class="cursor-pointer text-[#003F72] text-md  py-3 font-bold dark:text-blue-500">Avaliações</a></li>
-              <li class="list-none pb-1"><a :href="'/salaries/company/' + company.id" class="cursor-pointer text-[#003F72] text-md  py-3 font-bold dark:text-blue-500">Salários</a></li>
+              <li class="list-none pb-1"><a :href="'/overview/company/' + company.id" class="cursor-pointer text-[#003F72] text-md  py-4 font-bold">Visão Geral</a></li>
+              <li class="list-none pb-1 border-b-[4px] border-[#003F72]"><a :href="'/reviews/company/' + company.id" class="cursor-pointer text-[#003F72] text-md  py-3 font-bold">Avaliações</a></li>
+              <li class="list-none pb-1"><a :href="'/salaries/company/' + company.id" class="cursor-pointer text-[#003F72] text-md  py-3 font-bold">Salários</a></li>
             </ul>
           </div>
         </div>

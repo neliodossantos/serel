@@ -1,61 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import DashboardLayout from "@/layout/DashboardLayout.vue";
 import router from "@/router";
-import { useReviewStore } from '@/stores/reviews';
-import type { Review } from '@/types/Review';
-
-const reviewStore = useReviewStore();
-const review = ref<Review | null>(null);
-const loading = ref(false);
-
-const reviewId = router.currentRoute.value.params.id as string;
-
 const backToPage = () => {
   router.back();
-};
-
-const fetchReview = async () => {
-  loading.value = true;
-  try {
-    const response = await reviewStore.getOne({ id: reviewId });
-    if (response.success) {
-      review.value = response.data;
-    }
-  } catch (error) {
-    console.error(error);
-  } finally {
-    loading.value = false;
-  }
-};
-
-const approveReview = async () => {
-  if (!review.value) return;
-  const response = await reviewStore.updateStatus({ id: review.value.id, status: 'approved' });
-  if (response.success) {
-    await fetchReview();
-  }
-};
-
-const rejectReview = async () => {
-  if (!review.value) return;
-  const response = await reviewStore.updateStatus({ id: review.value.id, status: 'rejected' });
-  if (response.success) {
-    await fetchReview();
-  }
-};
-
-const updateStatus = async () => {
-  if (!review.value) return;
-  const response = await reviewStore.updateStatus({ id: review.value.id, status: review.value.status });
-  if (response.success) {
-    // Status updated
-  }
-};
-
-onMounted(() => {
-  fetchReview();
-});
+}
 </script>
 
 <template>
@@ -66,21 +14,22 @@ onMounted(() => {
         <i class='bx bx-arrow-back text-black text-md' ></i>Voltar
       </a>
     </div>
-    <div v-if="loading" class="text-center">Carregando...</div>
-    <div v-else-if="!review" class="text-center">Avaliação não encontrada.</div>
-    <div v-else class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-x-7 xl:gap-x-14">
+    <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-x-7 xl:gap-x-14">
       <div class="lg:col-span-2 xl:col-span-3">
         <div class="p-2 lg:py-0 py-5 flex flex-wrap items-start justify-between border-b w-full">
           <div class="">
-            <h2 class="text-[#2D2D2D] font-bold text-3xl">{{ review.userId }}</h2>
-            <span class="text-[#2D2D2D] underline mb-3 block">{{ review.userId }}@email.com</span>
+            <h2 class="text-[#2D2D2D] font-bold text-3xl">Caio Teca</h2>
+            <span class="text-[#2D2D2D] underline mb-3 block">caiotecanttp8_mvh@indeedemail.com</span>
           </div>
           <div class="flex w-full md:w-auto justify-between  space-x-2">
             <div class="border-2 flex justify-between gap-2 p-2 rounded">
-              <button v-if="review.status === 'in_review'" @click="approveReview">
+              <button>
                 <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M5 13L9 17L19 7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
               </button>
-              <button v-if="review.status === 'in_review'" @click="rejectReview">
+              <button>
+                <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M7.90039 8.07954C7.90039 3.30678 15.4004 3.30682 15.4004 8.07955C15.4004 11.4886 11.9913 10.8067 11.9913 14.8976" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 19.01L12.01 18.9989" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </button>
+              <button>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
               </button>
             </div>
@@ -92,28 +41,32 @@ onMounted(() => {
         <div class="w-full">
           <div class="py-5 space-y-4">
             <div class="bg-white p-4 space-y-4">
-              <h2 class="font-bold text-2xl">Avaliação - {{ review.companyId }}</h2>
+              <h2 class="font-bold text-2xl">Avaliação - Sonangol </h2>
               <div class="space-y-2">
                 <div class="flex gap-1">
-                  <img v-for="i in Math.floor(review.score)" :key="'fill-' + i" class="w-6 h-6" src="@/assets/img/star_fill.svg" alt="">
-                  <img v-for="i in (5 - Math.floor(review.score))" :key="'outline-' + i" class="w-6 h-6" src="@/assets/img/star_outline.svg" alt="">
+                  <img class="w-6 h-6" src="@/assets/img/star_fill.svg" alt="">
+                  <img class="w-6 h-6" src="@/assets/img/star_fill.svg" alt="">
+                  <img class="w-6 h-6" src="@/assets/img/star_fill.svg" alt="">
+                  <img class="w-6 h-6" src="@/assets/img/star_outline.svg" alt="">
+                  <img class="w-6 h-6" src="@/assets/img/star_outline.svg" alt="">
                 </div>
                 <div>
-                  <h2>{{ review.reviewTitle }}</h2>
-                  <p class="text-[#595959]">{{ review.comment.comment }}</p>
+                  <h2>Empresa sólida, que te oferece uma gama de produtos, boa reputação, oferece desafios e remunera por eles.</h2>
+                  <p class="text-[#595959]">Qual é a melhor parte de trabalhar na empresa?</p>
+                  <p class="text-[#595959]">Amei trabalhar lá , vários cursos experiência e benefícios, sem falar que ajudam em sua educação financeira.</p>
                 </div>
                 <div>
                   <div class="mb-2">
                     <p class="text-[#595959] font-bold">Recomendaria?</p>
-                    <span>{{ review.recommend ? 'Sim' : 'Não' }}.</span>
+                    <span>Não.</span>
                   </div>
                   <div class="mb-2">
                     <p class="text-[#595959] font-bold">Aspectos Positivos?</p>
-                    <span>{{ review.comment.positiveAspects }}</span>
+                    <span>Não tenho nenhuma reclamação, realmente não houve partes estressantes.</span>
                   </div>
                   <div class="mb-2">
                     <p class="text-[#595959] font-bold">Aspectos Negativo?</p>
-                    <span>{{ review.comment.negativeAspects }}</span>
+                    <span>Chegam e encontrar locais apropriados para ajudara escolher.</span>
                   </div>
                 </div>
               </div>
@@ -124,10 +77,8 @@ onMounted(() => {
       <div class="bg-[#FAF9F8] min-w-64 rounded-md p-3">
         <div class="pl-5 bg-white border rounded-md">
           <label class="block text-[#2D2D2D] font-bold pt-2">Status:</label>
-          <select class="p-3" v-model="review.status" @change="updateStatus">
-            <option value="in_review">Aguardando avaliação</option>
-            <option value="approved">Aprovado</option>
-            <option value="rejected">Rejeitado</option>
+          <select class="p-3">
+            <option>Aguardando avaliação</option>
           </select>
         </div>
         <div class="p-3 mt-5">

@@ -176,25 +176,25 @@ onMounted(async () => {
     <PreloaderComponent v-else-if="isLoading" />
     <MainLayout v-else>
         <div
-            class="w-full md:h-[500px] bg-[#F8FAFB] dark:bg-[#000e1c] shadow flex items-center py-10">
+            class="w-full md:h-[500px] bg-[#F8FAFB] shadow flex items-center py-10">
             <div class="w-full px-[12%]">
                 <div class="flex items-center gap-[64px] justify-between">
                     <div class="flex-1 text-center">
                         <button
-                            class="xs:text-sm cursor-default border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2 dark:text-white"
+                            class="xs:text-sm cursor-default border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2"
                         >
                             <i
-                                class="bx bx-star text-xl 3xl:text-2xl text-[#003F72] dark:text-white"
+                                class="bx bx-star text-xl 3xl:text-2xl text-[#003F72]"
                             ></i>
                             Avaliações reais de funcionários
                         </button>
                         <h1
-                            class="text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-[600px] mx-auto text-[#2D2D2D] dark:text-white"
+                            class="text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-[600px] mx-auto text-[#2D2D2D]"
                         >
                             Descubra como é trabalhar nas melhores empresas !
                         </h1>
                         <p
-                            class="hidden sm:block text-xl md:text-2xl max-w-[800px] mx-auto dark:text-gray-300"
+                            class="hidden sm:block text-xl md:text-2xl max-w-[800px] mx-auto"
                         >
                             Avaliações autênticas sobre experiência e salário
                             compartilhadas por funcionários atuais e antigos.
@@ -230,22 +230,22 @@ onMounted(async () => {
                 v-if="!isLoading && !isEmpty"
                 class="flex items-center justify-between flex-wrap mt-4"
             >
-                <span class="md:text-left text-end md:w-auto dark:text-gray-300">
+                <span class="md:text-left text-end md:w-auto">
                     {{ totalLoaded }} de {{ totalItems }} empresas
                     encontrados
                 </span>
                 <div class="flex gap-2 items-center">
-                    <span class="block flex-1 dark:text-white">Ordenar por:</span>
+                    <span class="block flex-1">Ordenar por:</span>
                     <div class="relative flex-1 min-w-44">
                         <button
                             type="button"
                             @click="
                                 showDropdownFilterBy = !showDropdownFilterBy
                             "
-                            class="w-full h-full flex items-center justify-between p-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#003F72] border border-[#D4D2D0] dark:focus:ring-white"
+                            class="w-full h-full flex items-center justify-between p-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#003F72] border border-[#D4D2D0]"
                         >
                             <div class="flex items-center gap-2">
-                                <span class="inline text-sm md:text-base dark:text-white">{{
+                                <span class="inline text-sm md:text-base">{{
                                     currentFilter === "numberOfReviews"
                                         ? "Mais Relevantes"
                                         : currentFilter === "average"
@@ -254,7 +254,7 @@ onMounted(async () => {
                                 }}</span>
                             </div>
                             <svg
-                                class="w-4 h-4 dark:text-white"
+                                class="w-4 h-4"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -307,8 +307,8 @@ onMounted(async () => {
                         <div class="bg-gray-100 inline-flex rounded-full p-4 mb-4">
                             <i class="bx bx-building text-5xl text-[#003F72]"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2 dark:text-gray-300">Não encontrou a empresa?</h3>
-                        <p class="text-gray-600 max-w-md dark:text-gray-300">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Não encontrou a empresa?</h3>
+                        <p class="text-gray-600 max-w-md">
                             Você pode adicionar a empresa {{ search }} à nossa base de dados.
                         </p>
                     </div>

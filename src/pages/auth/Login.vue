@@ -6,10 +6,7 @@ import {useRoute, useRouter} from 'vue-router';
 import {useUserStore} from "@/stores/users";
 import ToastContainer from "@/components/toast/ToastContainer.vue";
 import {useToast} from "@/composables/useToast";
-import { useTheme } from "@/composables/useTheme";
 
-
-const { isDark } = useTheme();
 const toast = useToast();
 const router = useRouter();
 const route = useRoute();
@@ -66,24 +63,23 @@ const handleSubmit = async () => {
 </script>
 <template>
     <AuthLayout>
-      <div class="md:bg-white dark:bg-transparent md:py-[40px] md:px-[50px] md:w-[460px] box-border mx-auto md:rounded-[16px] md:shadow-lg dark:shadow-none">
+      <div class="md:bg-white md:py-[40px] md:px-[50px] md:w-[460px] box-border mx-auto md:rounded-[16px] md:shadow-lg">
         <div class="mb-5">
           <a href="/">
-            <img v-if="isDark" class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo_white.png" alt="">
-            <img v-else class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo.png" alt="">
+            <img class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo.png" alt="">
           </a>
         </div>
-        <h1 class="my-1 font-[700] text-2xl dark:text-white">Seja  bem-vindo de volta</h1>
-        <p class="text-[14px] text-[#344054] font-[500] dark:text-gray-300">Para usar o sistema, por favor informe os seus dados</p>
+        <h1 class="my-1 font-[700] text-2xl">Seja  bem-vindo de volta</h1>
+        <p class="text-[14px] text-[#344054] font-[500]">Para usar o sistema, por favor informe os seus dados</p>
         <form @submit.prevent="handleSubmit" class="">
           <div class="flex flex-col mt-2 mb-2 gap-1">
-            <span class="text-[#344054] text-sm block font-[500] dark:text-gray-300">E-mail</span>
+            <span class="text-[#344054] text-sm block font-[500]">E-mail</span>
             <input v-model="user.email" :class="!errors.email.valid ? 'border-red-400 focus:ring-red-400' : ''" class="w-full px-4 py-2 border border-[#003F72] rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" type="email" placeholder="Seu e-mail">
             <span class="text-red-400 text-sm" v-if="!errors.email.valid">{{errors.email.message}}</span>
           </div>
           <div class="w-full mb-2">
             <div class="relative flex flex-col gap-1">
-              <span class="text-[#344054] text-sm [font-[500] dark:text-gray-300">Palavra-passe</span>
+              <span class="text-[#344054] text-sm [font-[500]">Palavra-passe</span>
               <input  v-model="user.password" :type="showPassword ? 'text' : 'password'" :class="!errors.password.valid ? 'border-red-400 focus:ring-red-400' : ''" class="w-full px-4 py-2 border border-[#003F72] rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" placeholder="Digite sua senha"/>
               <button type="button" @click="togglePassword" class="absolute inset-y-0 top-7 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none">
                 <svg :class="!errors.password.valid ? 'text-red-400' : ''" v-if="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -98,7 +94,7 @@ const handleSubmit = async () => {
             <span class="text-red-400 text-sm" v-if="!errors.password.valid">{{errors.password.message}}</span>
           </div>
           <div class="flex justify-end underline">
-            <a class="text-sm dark:text-blue-500" href="/forgot-password">Esqueci a minha palavra-passe</a>
+            <a class="text-sm" href="/forgot-password">Esqueci a minha palavra-passe</a>
           </div>
           <div class="">
             <button type="submit" :disabled="isLoading" :class="{'disable' : isLoading }"  class="flex items-center gap-3 justify-center mt-3 bg-[#003F72] text-white w-full py-[10px] px-[20px] rounded-[12px] font-bold">
@@ -106,8 +102,8 @@ const handleSubmit = async () => {
               <div v-if="isLoading" class="animate-spin rounded-full h-4 w-4 border-t-4 border-blue-500 border-solid"></div>
             </button>
             <div class="mt-3 flex justify-center items-center">
-              <span class="block dark:text-gray-300">Ainda não tens uma conta?</span>
-              <a class="text-center ml-1 hover:underline dark:text-blue-500" href="/signup">Crie conta</a>
+              <span class="block">Ainda não tens uma conta?</span>
+              <a class="text-center ml-1 hover:underline" href="/signup">Crie conta</a>
             </div>
           </div>
         </form>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MainLayout from "@/layout/MainLayout.vue";
 import {useRoute} from "vue-router";
-import {onMounted, reactive, ref, computed} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {useReviewStore} from "@/stores/reviews";
 import ItemReviewDetailsComponent from "@/components/companies/overview/list/item/ItemReviewDetailsComponent.vue";
 import type {Review} from "@/types/Review";
@@ -12,7 +12,6 @@ import {useCompanyStore} from "@/stores/companies";
 import type {Company} from "@/types/Company";
 import {useUserStore} from "@/stores/users";
 import ErrorReconnectComponent from "@/components/ErrorReconnectComponent.vue";
-import { useHead } from '@vueuse/head';
 
 const route = useRoute();
 const reviewId = route.params.reviewId;
@@ -26,50 +25,6 @@ const companyStore = useCompanyStore();
 const review = reactive<Partial<Review>>({});
 const userStore = useUserStore();
 
-// Dynamic meta tags for SEO and social sharing
-const metaTitle = computed(() => {
-  if (review.reviewTitle && company.name) {
-    return `${review.reviewTitle} - Avaliação da empresa - ${company.name}`;
-  }
-  return 'Avaliação de Empresa - Serel';
-});
-
-const metaDescription = computed(() => {
-  if (review.comment?.comment) {
-    return review.comment.comment.length > 160
-      ? review.comment.comment.substring(0, 160) + '...'
-      : review.comment.comment;
-  }
-  if (review.score && company.name) {
-    return `Avaliação da empresa ${company.name} com ${review.score} estrelas. Leia a opinião completa.`;
-  }
-  return 'Leia avaliações reais de empresas e salários. Descubra experiências de funcionários.';
-});
-
-const metaImage = computed(() => {
-  return company.logo || `${window.location.origin}/logo_alternativo_serel.png`;
-});
-
-const metaUrl = computed(() => window.location.href);
-
-useHead({
-  title: metaTitle,
-  meta: [
-    { name: 'description', content: metaDescription },
-    // Open Graph
-    { property: 'og:title', content: metaTitle },
-    { property: 'og:description', content: metaDescription },
-    { property: 'og:image', content: metaImage },
-    { property: 'og:url', content: metaUrl },
-    { property: 'og:type', content: 'article' },
-    // Twitter Card
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: metaTitle },
-    { name: 'twitter:description', content: metaDescription },
-    { name: 'twitter:image', content: metaImage },
-  ],
-});
-
 
 const backToPage = () => {
   if(window.history.length > 1){
@@ -82,6 +37,7 @@ onMounted(async () => {
     isLoading.value = true;
     hasError.value = false;
 
+    // Verificar se está online
     if (!navigator.onLine) {
       hasError.value = true;
       errorMessage.value = 'Sem conexão com a internet. Verifique sua rede e tente novamente.';
@@ -137,14 +93,14 @@ onMounted(async () => {
   />
   <PreloaderComponent v-else-if="isLoading"></PreloaderComponent>
   <MainLayout v-else>
-    <div class="w-full bg-[#F8FAFB] dark:bg-[#000e1c] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
+    <div class="w-full bg-[#F8FAFB] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
     <div class="w-full mb-24 px-[12%] md:px-0">
       <div class="mx-auto relative  max-w-[400px] sm:max-w-[600px] md:max-w-[900px]">
-        <a v-if="userStore.isLogged()" @click="backToPage" class="cursor-pointer flex items-center dark:text-white">
+        <a v-if="userStore.isLogged()" @click="backToPage" class="cursor-pointer flex items-center">
           <i class='bx bx-chevron-left text-3xl md:text-2xl'></i>
           Voltar a página anterior
         </a>
-        <a v-else href="/" class="cursor-pointer flex items-center dark:text-white">
+        <a v-else href="/" class="cursor-pointer flex items-center">
           <i class='bx bx-chevron-left text-3xl md:text-2xl'></i>
           Voltar a página inicial
         </a>
@@ -158,5 +114,7 @@ onMounted(async () => {
     </div>
   </MainLayout>
 </template>
+
 <style scoped>
+
 </style>

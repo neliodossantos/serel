@@ -7,9 +7,7 @@ import router from "@/router";
 import PreloaderComponent from "@/components/PreloaderComponent.vue";
 import ToastContainer from "@/components/toast/ToastContainer.vue";
 import {useToast} from "@/composables/useToast";
-import { useTheme } from "@/composables/useTheme";
 
-const { isDark } = useTheme();
 const toast = useToast();
 const userStore = useUserStore();
 const isValidResetPasswordToken = ref(false);
@@ -80,7 +78,7 @@ onMounted(async () => {
   <PreloaderComponent v-if="isLoadingPage"></PreloaderComponent>
   <div v-else class="">
     <AuthLayout v-if="isValidResetPasswordToken">
-      <div class="py-[30px] md:py-[40px] md:px-[50px] md:bg-white dark:bg-transparent md:w-[460px] md:min-h-[380px] box-border mx-auto md:rounded-[16px] md:shadow-lg">
+      <div class="py-[30px] md:py-[40px] md:px-[50px] md:bg-white  md:w-[460px] md:min-h-[380px] box-border mx-auto md:rounded-[16px] md:shadow-lg">
         <div class="mb-5">
           <a href="/">
             <img class="md:max-w-[160px] max-w-[150px]" src="@/assets/img/logo.png" alt="">

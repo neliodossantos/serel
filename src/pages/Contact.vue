@@ -15,7 +15,7 @@ onMounted( ()=>{
 <template>
   <PreloaderComponent v-if="isLoading"></PreloaderComponent>
   <MainLayout v-else>
-    <div class="w-full bg-[#F8FAFB] dark:bg-[#000e1c] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
+    <div class="w-full bg-[#F8FAFB] min-h-[210px] mb-24 flex justify-center border-b border-[#D4D2D0] px-[12%]"></div>
     <div class=" w-full mb-24 px-[12%]">
       <div class="mx-auto relative max-w-[400px] sm:max-w-[600px] md:max-w-[900px]">
         <a class="left-0 xxs:-top-40 -top-44 absolute cursor-pointer">

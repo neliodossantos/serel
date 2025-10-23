@@ -70,23 +70,25 @@ const features = ref([
                    @close="showModalUser = false"></ModalAuth>
         <!-- Hero Section -->
         <div
-            class="w-full md:h-[400px] bg-[#F8FAFB] dark:bg-[#000e1c] shadow flex items-center py-10">
+            class="w-full md:h-[400px] bg-[#F8FAFB] shadow flex items-center py-10">
             <div class="w-full px-[12%]">
                 <div class="flex items-center gap-[64px] justify-between">
                     <div class="flex-1 text-center">
                         <button
-                            class="xs:text-sm dark:text-white cursor-default border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2"
+                            class="xs:text-sm cursor-default border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2"
                         >
-                            <i class="bx bx-help-circle text-xl 3xl:text-2xl text-[#003F72] dark:text-white"></i>
+                            <i
+                                class="bx bx-help-circle text-xl 3xl:text-2xl text-[#003F72]"
+                            ></i>
                             Saiba mais sobre Serel
                         </button>
                         <h1
-                            class="text-3xl dark:text-white mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-xl mx-auto text-[#2D2D2D]"
+                            class="text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-xl mx-auto text-[#2D2D2D]"
                         >
                             Sobre a Serel
                         </h1>
                         <p
-                            class="hidden sm:block text-xl md:text-2xl dark:text-gray-300 max-w-[800px] mx-auto"
+                            class="hidden sm:block text-xl md:text-2xl max-w-[800px] mx-auto"
                         >
                             Conectamos talentos com oportunidades através da
                             transparência e experiências reais compartilhadas
@@ -97,23 +99,23 @@ const features = ref([
             </div>
         </div>
         <!-- Mission Section -->
-        <div class="w-full bg-white py-20 dark:bg-gray-900 dark:text-white">
+        <div class="w-full bg-white py-20">
             <div class="px-[8%] max-w-7xl mx-auto">
                 <div
                     class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
                 >
                     <div>
                         <h2
-                            class="text-3xl md:text-4xl font-bold text-[#2D2D2D] dark:text-white mb-6"
+                            class="text-3xl md:text-4xl font-bold text-[#2D2D2D] mb-6"
                         >
                             Nossa Missão
                         </h2>
-                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
                             Democratizar o acesso a informações sobre empresas e
                             ambientes de trabalho, capacitando profissionais a
                             tomarem decisões de carreira mais informadas.
                         </p>
-                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                             Acreditamos que cada pessoa merece trabalhar em um
                             ambiente que valorize seu talento e bem-estar. Por
                             isso, criamos uma plataforma onde a transparência e
@@ -153,7 +155,7 @@ const features = ref([
         </div>
 
         <!-- Stats Section -->
-        <div class="w-full bg-[#F8FAFB] dark:bg-gray-900 py-20 hidden">
+        <div class="w-full bg-[#F8FAFB] py-20 hidden">
             <div class="px-[8%] max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <h2
@@ -189,15 +191,15 @@ const features = ref([
         </div>
 
         <!-- Features Section -->
-        <div class="w-full bg-white py-20 dark:bg-gray-900">
+        <div class="w-full bg-white py-20">
             <div class="px-[8%] max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <h2
-                        class="text-3xl md:text-4xl font-bold text-[#2D2D2D] dark:text-white mb-4"
+                        class="text-3xl md:text-4xl font-bold text-[#2D2D2D] mb-4"
                     >
                         Por que Escolher a Serel?
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                         Oferecemos uma experiência única baseada em valores
                         sólidos e tecnologia de ponta.
                     </p>
@@ -218,10 +220,10 @@ const features = ref([
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-[#2D2D2D] dark:text-white mb-3">
+                            <h3 class="text-xl font-bold text-[#2D2D2D] mb-3">
                                 {{ feature.title }}
                             </h3>
-                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p class="text-gray-600 leading-relaxed">
                                 {{ feature.description }}
                             </p>
                         </div>

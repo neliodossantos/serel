@@ -189,26 +189,26 @@ function handleInput() {
     <MainLayout>
         <!-- Hero Section -->
         <div
-            class="w-full md:h-[500px] bg-[#F8FAFB] dark:bg-[#000e1c] shadow flex items-center py-10"
+            class="w-full md:h-[500px] bg-[#F8FAFB] shadow flex items-center py-10"
         >
             <div class="w-full px-[12%]">
                 <div class="flex items-center gap-[64px] justify-between">
                     <div class="flex-1 text-center">
                         <button
-                            class="xs:text-sm dark:text-white cursor-default border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2"
+                            class="xs:text-sm cursor-default border p-2 mb-3 rounded-lg shadow-sm flex items-center justify-center mx-auto gap-2"
                         >
                             <i
-                                class="bx bx-help-circle text-xl 3xl:text-2xl text-[#003F72] dark:text-white"
+                                class="bx bx-help-circle text-xl 3xl:text-2xl text-[#003F72]"
                             ></i>
                             Perguntas mais frequentes
                         </button>
                         <h1
-                            class="text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-xl mx-auto text-[#2D2D2D] dark:text-white"
+                            class="text-3xl mb-2.5 font-bold sm:text-4xl 2xl:text-5xl max-w-xl mx-auto text-[#2D2D2D]"
                         >
                             Encontre respostas para suas dúvidas!
                         </h1>
                         <p
-                            class="hidden sm:block text-xl md:text-2xl max-w-[800px] mx-auto dark:text-gray-300"
+                            class="hidden sm:block text-xl md:text-2xl max-w-[800px] mx-auto"
                         >
                             Tire suas dúvidas sobre a plataforma, avaliações e
                             muito mais.
@@ -241,7 +241,7 @@ function handleInput() {
         </div>
 
         <!-- FAQ Content -->
-        <div class="w-full bg-white py-16 dark:bg-gray-900">
+        <div class="w-full bg-white py-16">
             <div class="px-[8%] max-w-6xl mx-auto">
                 <!-- No Results Message -->
                 <div v-if="filteredFaqs.length === 0" class="text-center py-12">
@@ -349,7 +349,7 @@ function handleInput() {
         </div>
 
         <!-- Contact Section -->
-        <div class="w-full bg-[#F8FAFB] dark:bg-gray-900 py-16">
+        <div class="w-full bg-[#F8FAFB] py-16">
             <div class="px-[8%] max-w-4xl mx-auto text-center">
                 <div class="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
                     <i

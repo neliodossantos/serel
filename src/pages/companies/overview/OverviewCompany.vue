@@ -148,7 +148,7 @@ function toggleShowModalReview() {
     <PreloaderComponent v-else-if="isLoading"></PreloaderComponent>
     <MainLayout v-else>
         <div
-            class="w-full bg-[#F8FAFB] flex items-center md:border-none border-b border-[#D4D2D0] md:py-0 dark:bg-[#000e1c] dark:text-white"
+            class="w-full bg-[#F8FAFB] flex items-center md:border-none border-b border-[#D4D2D0] md:py-0"
         >
             <div class="w-full mt-10 md:mt-20 min-h-auto px-[12%]">
                 <div
@@ -208,7 +208,7 @@ function toggleShowModalReview() {
                                 </div>
                             </div>
                             <span
-                                class="block xs:hidden text-sm text-gray-500 dark:text-gray-200 underline"
+                                class="block xs:hidden text-sm text-gray-500 underline"
                                 >{{ company.sector }}</span
                             >
                         </div>
@@ -227,25 +227,25 @@ function toggleShowModalReview() {
                     <div class="">
                         <ul class="md:border-b md:border-gray-300 flex gap-3">
                             <li
-                                class="list-none pb-1 border-b-[4px] border-[#003F72] dark:border-blue-500"
+                                class="list-none pb-1 border-b-[4px] border-[#003F72]"
                             >
                                 <a
                                     :href="'/overview/company/' + company.id"
-                                    class="cursor-pointer text-[#003F72] text-md xs:text-sm py-4 font-bold dark:text-blue-500"
+                                    class="cursor-pointer text-[#003F72] text-md xs:text-sm py-4 font-bold"
                                     >Visão Geral</a
                                 >
                             </li>
                             <li class="list-none pb-1">
                                 <a
                                     :href="'/reviews/company/' + company.id"
-                                    class="cursor-pointer text-[#003F72] text-md xs:text-sm py-3 font-bold dark:text-blue-500"
+                                    class="cursor-pointer text-[#003F72] text-md xs:text-sm py-3 font-bold"
                                     >Avaliações</a
                                 >
                             </li>
                             <li class="list-none pb-1">
                                 <a
                                     :href="'/salaries/company/' + company.id"
-                                    class="cursor-pointer text-[#003F72] text-md xs:text-sm py-3 font-bold dark:text-blue-500"
+                                    class="cursor-pointer text-[#003F72] text-md xs:text-sm py-3 font-bold"
                                     >Salários</a
                                 >
                             </li>
