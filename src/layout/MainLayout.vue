@@ -218,12 +218,12 @@ const goToReviewCompany = () => {
                         melhor as empresas.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/share/14LLi9EAVPw/?mibextid=wwXIfr" class="rounded transition-colors">
+                        <a href="https://www.facebook.com/share/14LLi9EAVPw/?mibextid=wwXIfr" target="_blank" class="rounded transition-colors">
                             <img class="w-8 h-8" src="https://img.icons8.com/?size=100&id=118490&format=png&color=003F72"
                                 alt="Facebook"/>
                         </a>
                         <a href="https://www.instagram.com/serel_ao?igsh=cjk3eHpsYTFpNDNj"
-                            class="text-gray-400 hover:text-white transition-colors">
+                            target="_blank" class="text-gray-400 hover:text-white transition-colors">
                             <img class="w-8 h-8"
                                 src="https://img.icons8.com/?size=100&id=84884&format=png&color=003F72"
                                 alt="Instagram"/>
@@ -233,7 +233,7 @@ const goToReviewCompany = () => {
                                 alt="Twitter"/>
                         </a>
                         <a href="https://www.linkedin.com/company/sereloficial/"
-                            class="text-gray-400 hover:text-white transition-colors">
+                            target="_blank" class="text-gray-400 hover:text-white transition-colors">
                             <img class="w-8 h-8"
                                 src="https://img.icons8.com/?size=100&id=6zD8nvJF2ndM&format=png&color=003F72"
                                 alt="LinkedIn"/>

@@ -38,7 +38,7 @@ const generateMetaTags = (data) => {
     author = null,
   } = data
 
-  const imageType = image && image.toLowerCase().endsWith('.jpg') || image.toLowerCase().endsWith('.jpeg') ? 'image/jpeg' : 'image/png'
+  const imageType = image && (image.toLowerCase().endsWith('.jpg') || image.toLowerCase().endsWith('.jpeg')) ? 'image/jpeg' : 'image/png'
 
   return `
     <!-- Primary Meta Tags -->
@@ -78,11 +78,15 @@ export default async (req, res) => {
   const url = req.url || '/'
   let html = template
 
+  // Imagens padrão
+  const defaultBannerImage = 'https://serel-frontend-delta.vercel.app/banner_serel.jpg'
+  const defaultLogoImage = 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png'
+
   let metaData = {
     title: 'Serel - Compartilhe as suas experiências',
     description:
       'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-    image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+    image: defaultBannerImage,
     url: `https://serel-frontend-delta.vercel.app${url}`,
     type: 'website',
   }
@@ -91,17 +95,16 @@ export default async (req, res) => {
     const pathname = new URL(`https://serel-frontend-delta.vercel.app${url}`).pathname
     const parts = pathname.split('/').filter(Boolean)
     
-    
-    console.log(parts);
-    console.log(pathname);
+    console.log(parts)
+    console.log(pathname)
 
     /** 🏠 Página inicial */
-    if (parts[0] === '/' || parts.length === 0 || pathname === 'https://serel-frontend-delta.vercel.app/') {
+    if (parts.length === 0 || pathname === '/' || pathname === 'https://serel-frontend-delta.vercel.app/') {
       metaData = {
         title: 'Serel - Página Inicial',
         description:
           'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: 'https://serel-frontend-delta.vercel.app/',
         type: 'website',
       }
@@ -120,7 +123,9 @@ export default async (req, res) => {
           const logo =
             company.logo && company.logo.startsWith('http')
               ? company.logo
-              : `https://serel-frontend-delta.vercel.app${company.logo}`
+              : company.logo
+              ? `https://serel-frontend-delta.vercel.app${company.logo}`
+              : defaultBannerImage
 
           metaData = {
             title: `${sanitize(company.name)} - Avaliações e opiniões`,
@@ -160,9 +165,7 @@ export default async (req, res) => {
                 `Avaliação da empresa ${companyName} com ${review.score}/5 estrelas.`
             )
 
-            let imageUrl =
-              company.logo ||
-              'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png'
+            let imageUrl = company.logo || defaultLogoImage
             if (!imageUrl.startsWith('http')) {
               imageUrl = `https://serel-frontend-delta.vercel.app${imageUrl}`
             }
@@ -187,7 +190,7 @@ export default async (req, res) => {
         title: 'Sobre a Serel',
         description:
           'Saiba mais sobre a missão da Serel e como ajudamos as pessoas a compartilharem suas experiências.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -199,7 +202,7 @@ export default async (req, res) => {
         title: 'Contato - Serel',
         description:
           'Entre em contato com a equipe da Serel para suporte ou perguntas.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -210,7 +213,7 @@ export default async (req, res) => {
       metaData = {
         title: 'FAQ - Serel',
         description: 'Perguntas frequentes sobre a plataforma Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -221,7 +224,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Filtrar Empresas - Serel',
         description: 'Encontre e filtre empresas na plataforma Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -232,7 +235,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Login - Serel',
         description: 'Faça login na sua conta Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -243,7 +246,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Registrar - Serel',
         description: 'Crie sua conta na plataforma Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -254,7 +257,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Esqueci a Senha - Serel',
         description: 'Recupere sua senha na Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -265,7 +268,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Confirmar Conta - Serel',
         description: 'Confirme sua conta na Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -276,7 +279,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Redefinir Senha - Serel',
         description: 'Redefina sua senha na Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -287,7 +290,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Dashboard - Serel',
         description: 'Seu painel de controle na Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -298,7 +301,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Dashboard do Usuário - Serel',
         description: 'Gerencie suas avaliações e perfil na Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -309,7 +312,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Detalhes da Avaliação - Dashboard',
         description: 'Veja detalhes da avaliação no seu dashboard.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -325,7 +328,11 @@ export default async (req, res) => {
           { headers: { 'Content-Type': 'application/json' } }
         )
         if (company && company.id) {
-          const logo = company.logo && company.logo.startsWith('http') ? company.logo : `https://serel-frontend-delta.vercel.app${company.logo}`
+          const logo = company.logo && company.logo.startsWith('http') 
+            ? company.logo 
+            : company.logo 
+            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            : defaultBannerImage
           metaData = {
             title: `${sanitize(company.name)} - Avaliações`,
             description: sanitize(company.description || `Veja avaliações da empresa ${company.name} na Serel.`),
@@ -349,7 +356,11 @@ export default async (req, res) => {
           { headers: { 'Content-Type': 'application/json' } }
         )
         if (company && company.id) {
-          const logo = company.logo && company.logo.startsWith('http') ? company.logo : `https://serel-frontend-delta.vercel.app${company.logo}`
+          const logo = company.logo && company.logo.startsWith('http') 
+            ? company.logo 
+            : company.logo 
+            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            : defaultBannerImage
           metaData = {
             title: `${sanitize(company.name)} - Salários`,
             description: sanitize(company.description || `Veja salários na empresa ${company.name} na Serel.`),
@@ -373,7 +384,11 @@ export default async (req, res) => {
           { headers: { 'Content-Type': 'application/json' } }
         )
         if (company && company.id) {
-          const logo = company.logo && company.logo.startsWith('http') ? company.logo : `https://serel-frontend-delta.vercel.app${company.logo}`
+          const logo = company.logo && company.logo.startsWith('http') 
+            ? company.logo 
+            : company.logo 
+            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            : defaultBannerImage
           metaData = {
             title: `Avaliar ${sanitize(company.name)} - Serel`,
             description: sanitize(`Deixe sua avaliação para a empresa ${company.name}.`),
@@ -397,7 +412,11 @@ export default async (req, res) => {
           { headers: { 'Content-Type': 'application/json' } }
         )
         if (company && company.id) {
-          const logo = company.logo && company.logo.startsWith('http') ? company.logo : `https://serel-frontend-delta.vercel.app${company.logo}`
+          const logo = company.logo && company.logo.startsWith('http') 
+            ? company.logo 
+            : company.logo 
+            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            : defaultBannerImage
           metaData = {
             title: `Adicionar Salário - ${sanitize(company.name)}`,
             description: sanitize(`Adicione informações de salário para a empresa ${company.name}.`),
@@ -416,7 +435,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Adicionar Empresa - Serel',
         description: 'Adicione uma nova empresa à plataforma Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -427,7 +446,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Criar Empresa - Serel',
         description: 'Crie uma nova empresa na plataforma Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -438,7 +457,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Filtrar Salários de Empresas - Serel',
         description: 'Explore e filtre salários em diferentes empresas.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -449,7 +468,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Avaliação Geral - Serel',
         description: 'Deixe uma avaliação geral na plataforma Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -460,7 +479,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Visão Geral da Avaliação - Serel',
         description: 'Veja a visão geral de uma avaliação na Serel.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'article',
       }
@@ -471,7 +490,7 @@ export default async (req, res) => {
       metaData = {
         title: 'Não Autorizado - Serel',
         description: 'Você não tem permissão para acessar esta página.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
@@ -482,24 +501,23 @@ export default async (req, res) => {
       metaData = {
         title: 'Token Expirado - Serel',
         description: 'Seu token de autenticação expirou. Faça login novamente.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }
-    }else{
-      // Mantém os metadados padrão já definidos no início 
+    }
+    
+    /** 🌐 Outras páginas (fallback) */
+    else {
       metaData = {
         title: 'Serel - Compartilhe as suas experiências',
         description:
           'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
-        image: 'https://serel-frontend-delta.vercel.app/banner_serel.jpg',
+        image: defaultBannerImage,
         url: `https://serel-frontend-delta.vercel.app${url}`,
         type: 'website',
       }      
     }
-
-    /** 🌐 Outras páginas (fallback) */
-    // O else foi removido pois o metaData padrão já está definido no início
 
   } catch (err) {
     console.error('Erro ao gerar metadados:', err.message)
