@@ -130,10 +130,6 @@ const goToReviewCompany = () => {
                         Entrar
                     </a>
                 </div>
-                <a @click="toggleTheme"
-                    class="flex px-3 py-2.5 rounded-lg border-2 text-xl outline-none dark:border-none dark:bg-white cursor-pointer border transition-colors">
-                    <i :class="isDark ? 'bx bx-sun' : 'bx bx-moon'" class=""></i>
-                </a>
             </div>
         </nav>
         <div v-if="showMenuMobile" class="lg:hidden navbar-menu relative z-50">
@@ -179,13 +175,6 @@ const goToReviewCompany = () => {
                             Avaliar Empresa
                         </a>
                     </li>
-                    <li class="mb-1">
-                        <button @click="toggleTheme"
-                            class="block cursor-pointer p-4 text-sm text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded w-full text-left">
-                            <i :class="isDark ? 'bx bx-sun' : 'bx bx-moon'" class="text-xl mr-2"></i>
-                            {{ isDark ? 'Modo Claro' : 'Modo Escuro' }}
-                        </button>
-                    </li>
                 </ul>
                 <div class="mt-auto">
                     <div v-if="userStore.token">
@@ -229,21 +218,21 @@ const goToReviewCompany = () => {
                         melhor as empresas.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="rounded transition-colors">
+                        <a href="https://www.facebook.com/share/14LLi9EAVPw/?mibextid=wwXIfr" class="rounded transition-colors">
                             <img class="w-8 h-8" src="https://img.icons8.com/?size=100&id=118490&format=png&color=003F72"
                                 alt="Facebook"/>
                         </a>
-                        <a href="#"
+                        <a href="https://www.instagram.com/serel_ao?igsh=cjk3eHpsYTFpNDNj"
                             class="text-gray-400 hover:text-white transition-colors">
                             <img class="w-8 h-8"
                                 src="https://img.icons8.com/?size=100&id=84884&format=png&color=003F72"
                                 alt="Instagram"/>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="" class="text-gray-400 hover:text-white transition-colors">
                             <img class="w-8 h-8" src="https://img.icons8.com/?size=100&id=8808&format=png&color=003F72"
                                 alt="Twitter"/>
                         </a>
-                        <a href="#"
+                        <a href="https://www.linkedin.com/company/sereloficial/"
                             class="text-gray-400 hover:text-white transition-colors">
                             <img class="w-8 h-8"
                                 src="https://img.icons8.com/?size=100&id=6zD8nvJF2ndM&format=png&color=003F72"
