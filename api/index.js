@@ -78,39 +78,32 @@ export default async (req, res) => {
   const url = req.url || '/'
   let html = template
 
-  // Imagens padrão
-  const defaultBannerImage = 'https://serel-frontend-delta.vercel.app/banner_serel.jpg'
-  const defaultLogoImage = 'https://serel-frontend-delta.vercel.app/logo_alternativo_serel.png'
+  const defaultBannerImage = 'https://www.serel.ao/banner_serel.jpg'
+  const defaultLogoImage = 'https://www.serel.ao/logo_alternativo_serel.png'
 
   let metaData = {
     title: 'Serel - Compartilhe as suas experiências',
     description:
       'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
     image: defaultBannerImage,
-    url: `https://serel-frontend-delta.vercel.app${url}`,
+    url: `https://www.serel.ao/${url}`,
     type: 'website',
   }
 
   try {
-    const pathname = new URL(`https://serel-frontend-delta.vercel.app${url}`).pathname
+    const pathname = new URL(`https://www.serel.ao/${url}`).pathname
     const parts = pathname.split('/').filter(Boolean)
     
-    console.log(parts)
-    console.log(pathname)
-
-    /** 🏠 Página inicial */
-    if (parts.length === 0 || pathname === '/' || pathname === 'https://serel-frontend-delta.vercel.app/') {
+    if (parts.length === 0 || pathname === '/' || pathname === 'https://www.serel.ao/' || pathname === 'https://www.serel.ao') {
       metaData = {
         title: 'Serel - Página Inicial',
         description:
           'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
         image: defaultBannerImage,
-        url: 'https://serel-frontend-delta.vercel.app/',
+        url: 'https://www.serel.ao/',
         type: 'website',
       }
     }
-
-    /** 🏢 Página da empresa */
     else if (parts[0] === 'overview' && parts[1] === 'company' && parts.length === 3) {
       const companyId = parts[2]
       if (companyId) {
@@ -124,7 +117,7 @@ export default async (req, res) => {
             company.logo && company.logo.startsWith('http')
               ? company.logo
               : company.logo
-              ? `https://serel-frontend-delta.vercel.app${company.logo}`
+              ? `https://www.serel.ao/${company.logo}`
               : defaultBannerImage
 
           metaData = {
@@ -134,13 +127,12 @@ export default async (req, res) => {
                 `Veja avaliações e comentários sobre ${company.name} na Serel.`
             ),
             image: logo,
-            url: `https://serel-frontend-delta.vercel.app${url}`,
+            url: `https://www.serel.ao/${url}`,
             type: 'article',
           }
         }
       }
     }
-    /** 📝 Página de detalhes de review */
     else if (parts[0] === 'overview' && parts[1] === 'review' && parts[2] === 'details' && parts.length === 4) {
       const reviewId = parts[3]
       if (reviewId) {
@@ -167,14 +159,14 @@ export default async (req, res) => {
 
             let imageUrl = company.logo || defaultLogoImage
             if (!imageUrl.startsWith('http')) {
-              imageUrl = `https://serel-frontend-delta.vercel.app${imageUrl}`
+              imageUrl = `https://www.serel.ao/${imageUrl}`
             }
 
             metaData = {
               title: `Avaliação - ${reviewTitle} na empresa ${companyName}`,
               description: comment.substring(0, 155),
               image: imageUrl,
-              url: `https://serel-frontend-delta.vercel.app${url}`,
+              url: `https://www.serel.ao/${url}`,
               type: 'article',
               publishedTime: review.createdAt || null,
               author: sanitize(review.jobTitle || 'Anônimo'),
@@ -183,49 +175,41 @@ export default async (req, res) => {
         }
       }
     }
-
-    /** ℹ️ Página sobre */
     else if (parts[0] === 'about') {
       metaData = {
         title: 'Sobre a Serel',
         description:
           'Saiba mais sobre a missão da Serel e como ajudamos as pessoas a compartilharem suas experiências.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 📞 Página de contato */
     else if (parts[0] === 'contact') {
       metaData = {
         title: 'Contato - Serel',
         description:
           'Entre em contato com a equipe da Serel para suporte ou perguntas.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** ❓ Página FAQ */
     else if (parts[0] === 'faq') {
       metaData = {
         title: 'FAQ - Serel',
         description: 'Perguntas frequentes sobre a plataforma Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 🔍 Página de filtro */
     else if (parts[0] === 'filter') {
       metaData = {
         title: 'Filtrar Empresas - Serel',
         description: 'Encontre e filtre empresas na plataforma Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
@@ -236,89 +220,46 @@ export default async (req, res) => {
         title: 'Login - Serel',
         description: 'Faça login na sua conta Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 📝 Página de registro */
     else if (parts[0] === 'signup') {
       metaData = {
         title: 'Registrar - Serel',
         description: 'Crie sua conta na plataforma Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 🔑 Página de esqueci senha */
     else if (parts[0] === 'forgot-password') {
       metaData = {
         title: 'Esqueci a Senha - Serel',
         description: 'Recupere sua senha na Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** ✅ Página de confirmar conta */
     else if (parts[0] === 'confirm-account') {
       metaData = {
         title: 'Confirmar Conta - Serel',
         description: 'Confirme sua conta na Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 🔄 Página de redefinir senha */
     else if (parts[0] === 'reset-password') {
       metaData = {
         title: 'Redefinir Senha - Serel',
         description: 'Redefina sua senha na Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 📊 Dashboard */
-    else if (parts[0] === 'dashboard' && parts.length === 1) {
-      metaData = {
-        title: 'Dashboard - Serel',
-        description: 'Seu painel de controle na Serel.',
-        image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
-        type: 'website',
-      }
-    }
-
-    /** 👤 Dashboard do usuário */
-    else if (parts[0] === 'user' && parts[1] === 'dashboard') {
-      metaData = {
-        title: 'Dashboard do Usuário - Serel',
-        description: 'Gerencie suas avaliações e perfil na Serel.',
-        image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
-        type: 'website',
-      }
-    }
-
-    /** 📝 Detalhes da avaliação no dashboard */
-    else if (parts[0] === 'dashboard' && parts[1] === 'review') {
-      metaData = {
-        title: 'Detalhes da Avaliação - Dashboard',
-        description: 'Veja detalhes da avaliação no seu dashboard.',
-        image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
-        type: 'website',
-      }
-    }
-
-    /** 🏢 Avaliações da empresa */
     else if (parts[0] === 'reviews' && parts[1] === 'company' && parts.length === 3) {
       const companyId = parts[2]
       try {
@@ -331,13 +272,13 @@ export default async (req, res) => {
           const logo = company.logo && company.logo.startsWith('http') 
             ? company.logo 
             : company.logo 
-            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            ? `https://www.serel.ao/${company.logo}`
             : defaultBannerImage
           metaData = {
             title: `${sanitize(company.name)} - Avaliações`,
             description: sanitize(company.description || `Veja avaliações da empresa ${company.name} na Serel.`),
             image: logo,
-            url: `https://serel-frontend-delta.vercel.app${url}`,
+            url: `https://www.serel.ao/${url}`,
             type: 'article',
           }
         }
@@ -345,8 +286,6 @@ export default async (req, res) => {
         console.error('Erro ao buscar empresa para reviews:', err.message)
       }
     }
-
-    /** 💰 Salários da empresa */
     else if (parts[0] === 'salaries' && parts[1] === 'company' && parts.length === 3) {
       const companyId = parts[2]
       try {
@@ -359,13 +298,13 @@ export default async (req, res) => {
           const logo = company.logo && company.logo.startsWith('http') 
             ? company.logo 
             : company.logo 
-            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            ? `https://www.serel.ao/${company.logo}`
             : defaultBannerImage
           metaData = {
             title: `${sanitize(company.name)} - Salários`,
             description: sanitize(company.description || `Veja salários na empresa ${company.name} na Serel.`),
             image: logo,
-            url: `https://serel-frontend-delta.vercel.app${url}`,
+            url: `https://www.serel.ao/${url}`,
             type: 'article',
           }
         }
@@ -373,8 +312,6 @@ export default async (req, res) => {
         console.error('Erro ao buscar empresa para salaries:', err.message)
       }
     }
-
-    /** ✍️ Formulário de avaliação da empresa */
     else if (parts[0] === 'company' && parts[2] === 'review' && parts.length === 3) {
       const companyId = parts[1]
       try {
@@ -387,13 +324,13 @@ export default async (req, res) => {
           const logo = company.logo && company.logo.startsWith('http') 
             ? company.logo 
             : company.logo 
-            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            ? `https://www.serel.ao/${company.logo}`
             : defaultBannerImage
           metaData = {
             title: `Avaliar ${sanitize(company.name)} - Serel`,
             description: sanitize(`Deixe sua avaliação para a empresa ${company.name}.`),
             image: logo,
-            url: `https://serel-frontend-delta.vercel.app${url}`,
+            url: `https://www.serel.ao/${url}`,
             type: 'article',
           }
         }
@@ -401,8 +338,6 @@ export default async (req, res) => {
         console.error('Erro ao buscar empresa para review form:', err.message)
       }
     }
-
-    /** 💵 Formulário de salário da empresa */
     else if (parts[0] === 'company' && parts[2] === 'salary' && parts.length === 3) {
       const companyId = parts[1]
       try {
@@ -415,13 +350,13 @@ export default async (req, res) => {
           const logo = company.logo && company.logo.startsWith('http') 
             ? company.logo 
             : company.logo 
-            ? `https://serel-frontend-delta.vercel.app${company.logo}`
+            ? `https://www.serel.ao/${company.logo}`
             : defaultBannerImage
           metaData = {
             title: `Adicionar Salário - ${sanitize(company.name)}`,
             description: sanitize(`Adicione informações de salário para a empresa ${company.name}.`),
             image: logo,
-            url: `https://serel-frontend-delta.vercel.app${url}`,
+            url: `https://www.serel.ao/${url}`,
             type: 'article',
           }
         }
@@ -429,99 +364,82 @@ export default async (req, res) => {
         console.error('Erro ao buscar empresa para salary form:', err.message)
       }
     }
-
-    /** ➕ Adicionar empresa */
     else if (parts[0] === 'add' && parts[1] === 'company') {
       metaData = {
         title: 'Adicionar Empresa - Serel',
         description: 'Adicione uma nova empresa à plataforma Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 🏗️ Criar empresa */
     else if (parts[0] === 'company' && parts[1] === 'create') {
       metaData = {
         title: 'Criar Empresa - Serel',
         description: 'Crie uma nova empresa na plataforma Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 🔍 Filtrar salários de empresas */
     else if (parts[0] === 'companies' && parts[1] === 'salaries' && parts[2] === 'filter') {
       metaData = {
         title: 'Filtrar Salários de Empresas - Serel',
         description: 'Explore e filtre salários em diferentes empresas.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 📝 Avaliação geral */
     else if (parts[0] === 'company' && parts[1] === 'review') {
       metaData = {
         title: 'Avaliação Geral - Serel',
         description: 'Deixe uma avaliação geral na plataforma Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** 👁️ Visão geral da avaliação */
     else if (parts[0] === 'overview' && parts[1] === 'review' && parts.length === 3) {
       metaData = {
         title: 'Visão Geral da Avaliação - Serel',
         description: 'Veja a visão geral de uma avaliação na Serel.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'article',
       }
     }
-
-    /** 🚫 Não autorizado */
     else if (parts[0] === 'not-authorized') {
       metaData = {
         title: 'Não Autorizado - Serel',
         description: 'Você não tem permissão para acessar esta página.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-
-    /** ⏰ Token expirado */
     else if (parts[0] === 'expired-token') {
       metaData = {
         title: 'Token Expirado - Serel',
         description: 'Seu token de autenticação expirou. Faça login novamente.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }
     }
-    
-    /** 🌐 Outras páginas (fallback) */
     else {
       metaData = {
         title: 'Serel - Compartilhe as suas experiências',
         description:
           'Serel é uma plataforma onde você pode compartilhar suas experiências e inspirar outras pessoas.',
         image: defaultBannerImage,
-        url: `https://serel-frontend-delta.vercel.app${url}`,
+        url: `https://www.serel.ao/${url}`,
         type: 'website',
       }      
     }
 
   } catch (err) {
     console.error('Erro ao gerar metadados:', err.message)
-    // Em caso de erro, mantém os metadados padrão já definidos
   }
 
   const metaTags = generateMetaTags(metaData)
